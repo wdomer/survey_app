@@ -28,7 +28,7 @@ class _BottomBarState extends State<BottomBar> {
     });
     if (_selectedIndex == 0) {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomeSceen()));
+          context, MaterialPageRoute(builder: (context) => HomeScreen()));
     }
     if (_selectedIndex == 1) {
       Navigator.pushReplacement(

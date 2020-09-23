@@ -20,7 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  #google_maps_flutter: ^0.5.33
+#  google_maps_flutter: ^0.5.33
     
   provider: ^4.3.2+2
 

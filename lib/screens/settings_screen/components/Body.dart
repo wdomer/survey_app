@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:survey_app/common/AppColors.dart';
+import 'package:survey_app/screens/login_screen.dart';
 import 'package:survey_app/screens/settings_screen/components/SettingsScreenCard.dart';
 
 class Body extends StatefulWidget {
@@ -111,41 +113,48 @@ class _BodyState extends State<Body> {
   }
 
   Widget _logoutWidget() {
-    return Container(
-      height: MediaQuery.of(context).size.width / 5,
-      width: MediaQuery.of(context).size.width / 1.3,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(width: 1, color: Colors.black)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(
-            width: 10,
-          ),
-          SvgPicture.asset(
-            "assets/svg/logout.svg",
-            height: 36,
-            width: 36,
-            color: loginBtnColor,
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          Container(
-            //  width: MediaQuery.of(context).size.width / 1.7,
-            child: Text(
-              "LogOut",
-              // overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                // letterSpacing: 1,
-                color: unselectedItemColor,
+    return InkWell(
+      onTap: ()async{
+        SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+        sharedPreferences.clear();
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+      },
+      child: Container(
+        height: MediaQuery.of(context).size.width / 5,
+        width: MediaQuery.of(context).size.width / 1.3,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(width: 1, color: Colors.black)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(
+              width: 10,
+            ),
+            SvgPicture.asset(
+              "assets/svg/logout.svg",
+              height: 36,
+              width: 36,
+              color: loginBtnColor,
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Container(
+              //  width: MediaQuery.of(context).size.width / 1.7,
+              child: Text(
+                "LogOut",
+                // overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  // letterSpacing: 1,
+                  color: unselectedItemColor,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -12,7 +12,7 @@ class AllResults {
   AllResults({this.finalScore, this.questionId, this.score, this.option});
 
   factory AllResults.fromJson(Map<String, dynamic> json) =>
-      _$ResultsFromJson(json);
+      _$AllResultsFromJson(json);
 
-  Map toJson() => _$ResultsToJson(this);
+  Map toJson() => _$AllResultsToJson(this);
 }

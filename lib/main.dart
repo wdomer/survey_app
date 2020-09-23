@@ -1,16 +1,37 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:survey_app/local_database/moor_database.dart';
+import 'package:survey_app/screens/home_screen/HomeScreen.dart';
 import 'package:survey_app/screens/login_screen.dart';
+import 'package:survey_app/services/login_services.dart';
 import 'package:survey_app/services/surveys_all_services_local.dart';
 
-void main() {
+void main() async{
+WidgetsFlutterBinding.ensureInitialized();
+
+SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+String rememberMe = sharedPreferences.getString('rememberMe');
   runApp(
-    MyApp(),
+
+  EasyLocalization(
+    supportedLocales: [
+      Locale('en', 'US'),
+      Locale('ar', 'EG'),
+    ],
+    path: 'resources/langs',
+    child: MyApp(
+      rememberMe: rememberMe,
+    ),
+  ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  final String rememberMe;
+
+  const MyApp({Key key, this.rememberMe}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -19,10 +40,10 @@ class MyApp extends StatelessWidget {
 //          create: (_) => SurveyServices.create(),
 //          dispose: (_, SurveyServices services) => services.client.dispose,
 ////        ),
-//        Provider<SurveysAllServices>(
-//          create: (_) => SurveysAllServices.create(),
-//          dispose: (_, SurveysAllServices services) => services.client.dispose,
-//        ),
+        Provider<LoginServices>(
+          create: (_) => LoginServices.create(),
+          dispose: (_, LoginServices services) => services.client.dispose,
+        ),
         Provider<SurveysAllServicesLocal>(
           create: (_) => SurveysAllServicesLocal.create(),
           dispose: (_, SurveysAllServicesLocal services) => services.client.dispose,
@@ -39,8 +60,10 @@ class MyApp extends StatelessWidget {
             //  primarySwatch: loginBgColor,
             ),
         home:
-            //QuestionList()
-            LoginScreen(),
+        rememberMe==null?
+            LoginScreen():
+            HomeScreen(),
+
       ),
     );
   }

@@ -123,7 +123,7 @@ class _ShowResultState extends State<ShowResult> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HomeSceen(),
+                      builder: (context) => HomeScreen(),
                     ),
                   );
                 },

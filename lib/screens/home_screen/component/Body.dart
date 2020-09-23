@@ -6,6 +6,9 @@ import 'file:///C:/flutter_project/survey_app/lib/screens/saved_surveys_screen/s
 import 'package:survey_app/screens/survey_screen/SurveyScreen.dart';
 
 class Body extends StatefulWidget {
+  final String token;
+
+  const Body({Key key, this.token}) : super(key: key);
   @override
   _BodyState createState() => _BodyState();
 }
@@ -51,7 +54,9 @@ class _BodyState extends State<Body> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => DownloadFormScreen()));
+                              builder: (context) => DownloadFormScreen(
+                                token:widget.token,
+                              )));
                     },
                     icon: "assets/svg/download_form.svg",
                     title: "DownLoad Forms",

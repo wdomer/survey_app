@@ -6,7 +6,7 @@ part of 'results.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AllResults _$ResultsFromJson(Map<String, dynamic> json) {
+AllResults _$AllResultsFromJson(Map<String, dynamic> json) {
   return AllResults(
     finalScore: json['finalScore'] as String,
     questionId: json['questionId'] as int,
@@ -15,7 +15,8 @@ AllResults _$ResultsFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$ResultsToJson(AllResults instance) => <String, dynamic>{
+Map<String, dynamic> _$AllResultsToJson(AllResults instance) =>
+    <String, dynamic>{
       'finalScore': instance.finalScore,
       'questionId': instance.questionId,
       'score': instance.score,

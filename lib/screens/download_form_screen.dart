@@ -1,31 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:survey_app/local_database/all_surveys.dart';
 import 'package:survey_app/local_database/moor_database.dart';
 
 import 'package:survey_app/services/surveys_all_services_local.dart';
 
 class DownloadFormScreen extends StatefulWidget {
+  final String token;
+
+  const DownloadFormScreen({Key key, this.token}) : super(key: key);
   @override
   _DownloadFormScreenState createState() => _DownloadFormScreenState();
 }
 
 class _DownloadFormScreenState extends State<DownloadFormScreen> {
   bool isloading = false;
-  String token =
-      "bIvo1d7hvDYCbY6St86EeUI4GiF64NhFcjRvQH0NuHg5AZ0piryVDU822VwHfzygehNlopa4qgCat64J";
+  String token ;
     final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+    void getToken() async{
+      SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+
+      token=sharedPreferences.getString('token');
+
+    }
+    @override
+  void initState() {
+    super.initState();
+    getToken();
+  }
 
   @override
   Widget build(BuildContext context) {
+      print("token/////////////////////////////");
+      print(widget.token);
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey,
         body: Container(
           child: Container(
-            child: FutureBuilder(
+            child:widget.token!=null? FutureBuilder(
               future: Provider.of<SurveysAllServicesLocal>(context)
-                  .getSurveysLocal("Bearer $token", 0),
+                  .getSurveysLocal("Bearer ${widget.token}", 0),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
@@ -48,6 +65,8 @@ class _DownloadFormScreenState extends State<DownloadFormScreen> {
                   );
                 }
               },
+            ):Center(
+              child: CircularProgressIndicator(),
             ),
           ),
         ),
