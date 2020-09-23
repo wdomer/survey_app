@@ -7,15 +7,15 @@ import 'package:survey_app/local_database/results.dart';
 import 'package:survey_app/screens/home_screen/HomeScreen.dart';
 
 class ShowResult extends StatefulWidget {
-  final double percentage;
-  final double finalScore;
+  //final double percentage;
+  final List<double> finalScore;
   final List <AllResults> results;
   final String googleLocation;
   final String surveyName;
   final String town;
   final int surveyId;
 
-  const ShowResult({Key key, this.percentage, this.finalScore, this.results, this.googleLocation, this.surveyName, this.town, this.surveyId})
+  const ShowResult({Key key,  this.finalScore, this.results, this.googleLocation, this.surveyName, this.town, this.surveyId})
       : super(key: key);
   @override
   _ShowResultState createState() => _ShowResultState();
@@ -24,11 +24,25 @@ class ShowResult extends StatefulWidget {
 class _ShowResultState extends State<ShowResult> {
 
   ResultResponses responses;
+  double percentageResult;
+  double finalScore;
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
+    double finalScore=0;
+
+    for (num e in widget.finalScore) {
+      finalScore += e;
+    }
+
+      if(finalScore!=0){
+
+         percentageResult=finalScore/4;
+
+      }
+
   //  print();
     return Scaffold(
       key: _scaffoldKey,
@@ -40,7 +54,7 @@ class _ShowResultState extends State<ShowResult> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            " Percentage : ${widget.percentage} %",
+            " Percentage : $percentageResult %",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 22,
@@ -50,7 +64,7 @@ class _ShowResultState extends State<ShowResult> {
             height: 10,
           ),
           Text(
-            " Final score : ${widget.finalScore}",
+            " Final score : $finalScore",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 22,

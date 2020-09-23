@@ -21,7 +21,8 @@ class QuestionListScreen extends StatefulWidget {
 class _QuestionListScreenState extends State<QuestionListScreen> {
   Description description;
   List<AllResults> results = [];
-  List<CustomRadioGroup> customRadioGroup=[];
+  List<CustomRadioGroup> customRadioGroup = [];
+  List<double> finalScore = [];
   final itemSize = 500.0;
 //  static int questionCurrentIndex = 0;
   ScrollController _controller;
@@ -35,7 +36,13 @@ class _QuestionListScreenState extends State<QuestionListScreen> {
 
   void _addResult(AllResults newValue) {
     setState(() {
-      results.add(newValue) ;
+      results.add(newValue);
+    });
+  }
+
+  void _addScore(double score) {
+    setState(() {
+      finalScore.add(score);
     });
   }
 
@@ -51,7 +58,7 @@ class _QuestionListScreenState extends State<QuestionListScreen> {
 
   @override
   Widget build(BuildContext context) {
-  //  customRadioGroup.clear();
+    //  customRadioGroup.clear();
 //    for (int i; i < widget.question.length; i++) {
 //       customRadioGroup.add(
 //         CustomRadioGroup(
@@ -60,7 +67,6 @@ class _QuestionListScreenState extends State<QuestionListScreen> {
 //         )
 //       );
 //    }
-
 
     return SafeArea(
       child: Scaffold(
@@ -89,10 +95,10 @@ class _QuestionListScreenState extends State<QuestionListScreen> {
               child: ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 controller: _controller,
-                itemCount: widget.question.length ,
+                itemCount: widget.question.length,
                 itemExtent: itemSize,
                 itemBuilder: (context, index) {
-                  var q=widget.question[index];
+                  var q = widget.question[index];
 
                   List options = json.decode(q.options);
                   // List option;
@@ -106,25 +112,27 @@ class _QuestionListScreenState extends State<QuestionListScreen> {
                       opt.add(op);
                       sco.add(sc);
                     }
-
                   }
 
                   Map<String, String> map = new Map.fromIterables(sco, opt);
 
                   return CustomRadioGroup(
-                      key: GlobalKey(),
-                      question: q,
-                      singleOption: opt,
-                      length: widget.question.length,
-                      index: index,
-                      options: options,
-                      map: map,
-                    function: _addResult,
+                    key: GlobalKey(),
+                    question: q,
+                    singleOption: opt,
+                    length: widget.question.length,
+                    index: index,
+                    options: options,
+                    map: map,
+                    addScore: _addScore,
                     next: _moveDown,
-                      googleLocation  :widget. googleLocation,
-                      surveyName  : widget.surveyName,
-                    town :widget. town,
+                    googleLocation: widget.googleLocation,
+                    surveyName: widget.surveyName,
+                    town: widget.town,
                     surveyId: q.surveyId,
+                    finalResults: results,
+                    addResult: _addResult,
+                    finalScore: finalScore,
                   );
                 },
               ),

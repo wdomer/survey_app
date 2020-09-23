@@ -5,6 +5,7 @@ import 'package:survey_app/screens/saved_surveys_screen/show_result.dart';
 import 'package:survey_app/widget/my_radio_button_group.dart';
 
 class CustomRadioGroup extends StatefulWidget {
+
   final AllResults results;
   final int index;
   final int length;
@@ -12,7 +13,7 @@ class CustomRadioGroup extends StatefulWidget {
   final List<String> singleOption;
   final List<dynamic> options;
   final Question question;
-  final Function function;
+  final Function addScore;
   final Map<String, String> map;
   final Function addResult;
   final Function next;
@@ -20,12 +21,15 @@ class CustomRadioGroup extends StatefulWidget {
   final String surveyName;
   final String town;
   final int surveyId;
+  final List<AllResults> finalResults;
+  final List<double>finalScore;
+
 
   const CustomRadioGroup({
     Key key,
     this.height,
     this.singleOption,
-    this.function,
+    this.addScore,
     this.index,
     this.length,
     this.question,
@@ -35,7 +39,7 @@ class CustomRadioGroup extends StatefulWidget {
     this.results,
     this.map,
     this.addResult,
-    this.next, this.googleLocation, this.surveyName, this.town, this.surveyId,
+    this.next, this.googleLocation, this.surveyName, this.town, this.surveyId, this.finalResults, this.finalScore,
   }) : super(key: key);
   @override
   __CustomRadioGroupState createState() => __CustomRadioGroupState();
@@ -46,9 +50,9 @@ class __CustomRadioGroupState extends State<CustomRadioGroup> {
   List<dynamic> options;
   String _picked;
 
-  AllResults result;
 
-  List<AllResults> results = [];
+
+  //List<AllResults> results = [];
 
 
   @override
@@ -152,33 +156,39 @@ class __CustomRadioGroupState extends State<CustomRadioGroup> {
                     double doubleScore = double.parse(key);
                     double finalScore = weight * doubleScore;
                     double surveyFinalScore = 0;
-                    result = AllResults(
+                    AllResults result = AllResults(
                         questionId: widget.question.id,
                         option: _picked,
-                        score: key != null ? key : '0',
+                      //  score: key != null ? key : '0',
                         finalScore: finalScore.toString());
 
 
                     if (_picked != null) {
                       if (widget.index + 1 < widget.length) {
-                        _calculateResult();
+                    //    _calculateResult();
+
                         surveyFinalScore += finalScore;
-                        results.add(result);
+                        widget.addScore(finalScore);
+
                         widget.next();
+                     //   results.add(result);
+                        widget.addResult(result);
+                        print(widget.finalResults.length);
+                        print(widget.finalResults);
+                      //  print(key);
                       }
                       if (widget.index + 1 == widget.length) {
-                        _calculateResult();
+                     //   _calculateResult();
                         surveyFinalScore += finalScore;
+                        widget.addResult(result);
                         double percentageScore =
                             surveyFinalScore != 0 ? surveyFinalScore / 4 : 0;
-                        results.add(result);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => ShowResult(
-                                      finalScore: surveyFinalScore,
-                                      percentage: percentageScore,
-                                  results: results,
+                                      finalScore: widget.finalScore,
+                                  results: widget.finalResults,
                                   googleLocation: widget.googleLocation,
                                   surveyName: widget.surveyName,
                                   town: widget.town,
@@ -204,12 +214,12 @@ class __CustomRadioGroupState extends State<CustomRadioGroup> {
       double weight = double.parse(widget.question.weightage);
       double doubleScore = double.parse(key);
       double finalScore = weight * doubleScore;
-      result = AllResults(
+      AllResults result = AllResults(
           questionId: widget.question.id,
           option: _picked,
           score: key != null ? key : '0',
           finalScore: finalScore.toString());
-      widget.function(result);
+      widget.addScore(result);
     }
     //  print(key);
   }
