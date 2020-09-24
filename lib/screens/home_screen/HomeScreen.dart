@@ -29,12 +29,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print('token');
     print(token);
     return Scaffold(
         drawer: DrawerWidget(),
         body: SafeArea(
           child: Body(
-            token:token
+            token:widget.token
           ),
         ),
         bottomNavigationBar: BottomBar());

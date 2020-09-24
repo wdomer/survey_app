@@ -12,7 +12,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _rememberMe = false;
+  bool _rememberMe = true;
   bool _isLoading = false;
   var _formKey = GlobalKey<FormState>();
 
@@ -203,6 +203,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       }
                                       if (_formKey.currentState.validate() &&
                                           _rememberMe == true) {
+                                        _scaffoldKey.currentState.showSnackBar(
+                                            SnackBar(
+                                                content: Text(
+                                                    "Email and Password is required")));
 
                                         LoginModel loginModel = LoginModel(
                                           device_name: "android",
@@ -232,21 +236,22 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       HomeScreen(
                                                         token:responseToken ,
                                                       )));
-                                          print(response.body);
                                         } else {
-                                          setState(() {
-                                            _isLoading = false;
-                                          });
+
                                           _scaffoldKey.currentState
                                               .showSnackBar(SnackBar(
                                                   content: Text(
                                                       "Email or password is not correct !")));
                                         }
                                         //  print(response.headers);
+                                        print(response.body);
+                                        print(response.statusCode);
+                                        print(response.error);
 
 //
                                       }
                                       if ((_formKey.currentState.validate())) {
+
 
                                         LoginModel loginModel = LoginModel(
                                           device_name: "android",
@@ -267,6 +272,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   content: Text(
                                                       "Please wait ....")));
                                           String responseToken = response.body;
+                                          share.setString(
+                                              "token", responseToken);
+                                          share.setString("rememberMe", "rememberMe");
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -275,9 +283,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         token: responseToken,
                                                       )));
                                         } else {
-                                          setState(() {
-                                            _isLoading = false;
-                                          });
+
                                           _scaffoldKey.currentState
                                               .showSnackBar(SnackBar(
                                                   content: Text(

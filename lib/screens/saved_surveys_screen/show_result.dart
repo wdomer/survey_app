@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:survey_app/local_database/description.dart';
@@ -81,7 +82,9 @@ class _ShowResultState extends State<ShowResult> {
                 onPressed: () async {
 //                  _scaffoldKey.currentState.showSnackBar(
 //                      SnackBar(content: Text("downloading .....")));
-
+                   final DateTime now = DateTime. now();
+                   final DateFormat formatter = DateFormat('yyyy-MM-dd');
+                  final String formattedDate = formatter. format(now);
                   final database = await Provider.of<AppDatabase>(
                       context,
                       listen: false);
@@ -93,7 +96,9 @@ class _ShowResultState extends State<ShowResult> {
                       town: widget.town,
                       surveyId: widget.surveyId,
                       googleLocation: widget.googleLocation,
-                      surveyName: widget.surveyName
+                      surveyName: widget.surveyName,
+                      dateOfSubmission: formattedDate
+
 
                     ),
                     results: widget.results
