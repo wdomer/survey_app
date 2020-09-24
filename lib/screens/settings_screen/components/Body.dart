@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:survey_app/common/AppColors.dart';
 import 'package:survey_app/screens/login_screen.dart';
+import 'package:survey_app/screens/settings_screen/change_password_screen.dart';
 import 'package:survey_app/screens/settings_screen/components/SettingsScreenCard.dart';
 
 class Body extends StatefulWidget {
@@ -67,6 +68,9 @@ class _BodyState extends State<Body> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     SettingsScreenCard(
+                      tapped: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ChangePasswordScreen()));
+                      },
                       icon: "assets/svg/password.svg",
                       title: "Password",
                     ),

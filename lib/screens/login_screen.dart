@@ -161,6 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       // color: bgColor,
                                     ),
                                     child: TextFormField(
+                                      obscureText: true,
                                       controller: _passwordController,
                                       keyboardType:
                                           TextInputType.visiblePassword,

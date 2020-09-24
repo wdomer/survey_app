@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:survey_app/local_database/moor_database.dart';
 import 'package:survey_app/screens/home_screen/HomeScreen.dart';
 import 'package:survey_app/screens/login_screen.dart';
+import 'package:survey_app/services/change_password_services.dart';
 import 'package:survey_app/services/login_services.dart';
 import 'package:survey_app/services/response_services.dart';
 import 'package:survey_app/services/surveys_all_services_local.dart';
@@ -52,6 +53,10 @@ class MyApp extends StatelessWidget {
         Provider<AppDatabase>(
           create: (_) => AppDatabase(),
         //  dispose: (_, AppDatabase services) => services.,
+        ),
+        Provider<ChangePasswordServices>(
+          create: (_) => ChangePasswordServices.create(),
+          dispose: (_, ChangePasswordServices services) => services.client.dispose,
         ),
       ],
       child: MaterialApp(
