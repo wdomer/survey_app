@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:survey_app/local_database/data.dart';
-import 'package:survey_app/local_database/description.dart';
 import 'package:survey_app/local_database/responses.dart';
 import 'package:survey_app/screens/saved_surveys_screen/question_list_screen.dart';
+import 'package:survey_app/widget/map_widget.dart';
 
 class SurveyDescriptionScreen extends StatefulWidget {
   final DataModel data;
@@ -24,7 +23,8 @@ class _SurveyDescriptionScreenState extends State<SurveyDescriptionScreen> {
   var _descriptionFormKey = GlobalKey<FormState>();
   TextEditingController _townController;
   ResultResponses result = ResultResponses();
-  String map = "{17.3937369,78.4585406,438.5}";
+  String latitude='15.5007' ;
+  String longitude='32.5599';
 
   @override
   void initState() {
@@ -36,6 +36,15 @@ class _SurveyDescriptionScreenState extends State<SurveyDescriptionScreen> {
   void dispose() {
     _townController.dispose();
     super.dispose();
+  }
+
+  void _addLatLong(String lat,lon){
+    setState(() {
+      latitude=lat;
+      longitude=longitude;
+    });
+    print(lat);
+    print(lon);
   }
 
   @override
@@ -89,6 +98,9 @@ class _SurveyDescriptionScreenState extends State<SurveyDescriptionScreen> {
                 height: MediaQuery.of(context).size.height / 2,
                 width: MediaQuery.of(context).size.width / 2,
                 decoration: BoxDecoration(color: Colors.grey[500]),
+                child: MapWidget(
+                  onTap:_addLatLong
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -106,7 +118,7 @@ class _SurveyDescriptionScreenState extends State<SurveyDescriptionScreen> {
                             MaterialPageRoute(
                               builder: (context) => QuestionListScreen(
                                   question: widget.data.question,
-                                  googleLocation: map,
+                                  googleLocation:"{$latitude,$longitude,438.5}" ,
                                   surveyName: widget.data.name,
                                   town: _townController.text
                               ),

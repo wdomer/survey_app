@@ -6,6 +6,7 @@ import 'package:survey_app/local_database/moor_database.dart';
 import 'package:survey_app/screens/home_screen/HomeScreen.dart';
 import 'package:survey_app/screens/login_screen.dart';
 import 'package:survey_app/services/login_services.dart';
+import 'package:survey_app/services/response_services.dart';
 import 'package:survey_app/services/surveys_all_services_local.dart';
 
 void main() async{
@@ -36,10 +37,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-//        Provider<SurveyServices>(
-//          create: (_) => SurveyServices.create(),
-//          dispose: (_, SurveyServices services) => services.client.dispose,
-////        ),
+        Provider<ResponseServices>(
+          create: (_) => ResponseServices.create(),
+          dispose: (_, ResponseServices services) => services.client.dispose,
+       ),
         Provider<LoginServices>(
           create: (_) => LoginServices.create(),
           dispose: (_, LoginServices services) => services.client.dispose,

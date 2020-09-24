@@ -11,8 +11,8 @@
         android:label="survey_app"
         android:icon="@mipmap/ic_launcher">
 
-        <meta-data android:name="AIzaSyCx60-3gx-i-UgRKTSErDhX7ZEmvb_yo5c"
-            android:value="YOUR KEY HERE"/>
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCx60-3gx-i-UgRKTSErDhX7ZEmvb_yo5c"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
