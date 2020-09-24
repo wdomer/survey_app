@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:survey_app/local_database/Question.dart';
+import 'package:survey_app/local_database/back_result.dart';
 import 'package:survey_app/local_database/results.dart';
 import 'package:survey_app/screens/saved_surveys_screen/show_result.dart';
 import 'package:survey_app/widget/my_radio_button_group.dart';
 
+
 class CustomRadioGroup extends StatefulWidget {
 
-  final AllResults results;
+  final BackResults backResults;
   final int index;
   final int length;
   final double height;
@@ -21,7 +23,7 @@ class CustomRadioGroup extends StatefulWidget {
   final String surveyName;
   final String town;
   final int surveyId;
-  final List<AllResults> finalResults;
+  final List<BackResults> finalResults;
   final List<double>finalScore;
 
 
@@ -36,7 +38,7 @@ class CustomRadioGroup extends StatefulWidget {
 //      this.next,
 //      this.prev,
     this.options,
-    this.results,
+    this.backResults,
     this.map,
     this.addResult,
     this.next, this.googleLocation, this.surveyName, this.town, this.surveyId, this.finalResults, this.finalScore,
@@ -156,10 +158,10 @@ class __CustomRadioGroupState extends State<CustomRadioGroup> {
                     double doubleScore = double.parse(key);
                     double finalScore = weight * doubleScore;
                     double surveyFinalScore = 0;
-                    AllResults result = AllResults(
+                    BackResults result = BackResults(
                         questionId: widget.question.id,
-                        option: _picked,
-                      //  score: key != null ? key : '0',
+                     //   option: _picked,
+                        score: key != null ? key : '0',
                         finalScore: finalScore.toString());
 
 
@@ -188,7 +190,7 @@ class __CustomRadioGroupState extends State<CustomRadioGroup> {
                             MaterialPageRoute(
                                 builder: (context) => ShowResult(
                                       finalScore: widget.finalScore,
-                                  results: widget.finalResults,
+                                  backResult: widget.finalResults,
                                   googleLocation: widget.googleLocation,
                                   surveyName: widget.surveyName,
                                   town: widget.town,

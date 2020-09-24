@@ -1,5 +1,5 @@
+import 'package:survey_app/local_database/back_result.dart';
 import 'package:survey_app/local_database/description.dart';
-import 'package:survey_app/local_database/results.dart';
 import 'package:json_annotation/json_annotation.dart' as j;
 
 part 'responses.g.dart';
@@ -7,11 +7,11 @@ part 'responses.g.dart';
 @j.JsonSerializable()
 class ResultResponses {
   Description description;
-  List<AllResults> results;
+  List<BackResults> responses;
 
   ResultResponses({
     this.description,
-    this.results,
+    this.responses,
   });
 
   factory ResultResponses.fromJson(Map<String, dynamic> json) =>

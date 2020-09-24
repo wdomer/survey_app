@@ -19,9 +19,11 @@ class _$ResponseServices extends ResponseServices {
   @override
   Future<Response<dynamic>> sendResult(
       String authKey, ResultResponses responses) {
-    final $url = '/survey';
+    final $url = '/question_response';
     final $headers = {'Authorization': authKey};
-    final $request = Request('POST', $url, client.baseUrl, headers: $headers);
+    final $body = responses;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }
 }

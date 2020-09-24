@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:survey_app/local_database/Question.dart';
+import 'package:survey_app/local_database/back_result.dart';
 import 'package:survey_app/local_database/description.dart';
-import 'package:survey_app/local_database/results.dart';
 import 'package:survey_app/widget/CustomRadioGroup.dart';
 
 class QuestionListScreen extends StatefulWidget {
@@ -10,9 +10,10 @@ class QuestionListScreen extends StatefulWidget {
   final String googleLocation;
   final String surveyName;
   final String town;
+  final int surveyId;
 
   const QuestionListScreen(
-      {Key key, this.question, this.googleLocation, this.surveyName, this.town})
+      {Key key, this.question, this.googleLocation, this.surveyName, this.town, this.surveyId})
       : super(key: key);
   @override
   _QuestionListScreenState createState() => _QuestionListScreenState();
@@ -20,7 +21,7 @@ class QuestionListScreen extends StatefulWidget {
 
 class _QuestionListScreenState extends State<QuestionListScreen> {
   Description description;
-  List<AllResults> results = [];
+  List<BackResults> backResult = [];
   List<CustomRadioGroup> customRadioGroup = [];
   List<double> finalScore = [];
   final itemSize = 500.0;
@@ -34,9 +35,9 @@ class _QuestionListScreenState extends State<QuestionListScreen> {
     super.initState();
   }
 
-  void _addResult(AllResults newValue) {
+  void _addResult(BackResults newValue) {
     setState(() {
-      results.add(newValue);
+      backResult.add(newValue);
     });
   }
 
@@ -129,8 +130,8 @@ class _QuestionListScreenState extends State<QuestionListScreen> {
                     googleLocation: widget.googleLocation,
                     surveyName: widget.surveyName,
                     town: widget.town,
-                    surveyId: q.surveyId,
-                    finalResults: results,
+                    surveyId: q.surveyId==null?widget.surveyId:q.surveyId,
+                    finalResults: backResult,
                     addResult: _addResult,
                     finalScore: finalScore,
                   );

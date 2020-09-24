@@ -8,14 +8,14 @@ import 'package:survey_app/local_database/responses.dart';
 part 'response_services.chopper.dart';
 
 
-@ChopperApi(baseUrl: '/survey')
+@ChopperApi(baseUrl: '/question_response')
 abstract class ResponseServices extends ChopperService {
 
 
   @Post()
   Future<Response> sendResult(
       @Header('Authorization') String authKey,
-      @Post() ResultResponses responses,
+      @Body() ResultResponses responses,
       );
 
 //////////////////////////////////////////////

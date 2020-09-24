@@ -1,22 +1,21 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:survey_app/local_database/back_result.dart';
 import 'package:survey_app/local_database/description.dart';
 import 'package:survey_app/local_database/moor_database.dart';
 import 'package:survey_app/local_database/responses.dart';
-import 'package:survey_app/local_database/results.dart';
 import 'package:survey_app/screens/home_screen/HomeScreen.dart';
 
 class ShowResult extends StatefulWidget {
   //final double percentage;
   final List<double> finalScore;
-  final List <AllResults> results;
+  final List <BackResults> backResult;
   final String googleLocation;
   final String surveyName;
   final String town;
   final int surveyId;
 
-  const ShowResult({Key key,  this.finalScore, this.results, this.googleLocation, this.surveyName, this.town, this.surveyId})
+  const ShowResult({Key key,  this.finalScore, this.backResult, this.googleLocation, this.surveyName, this.town, this.surveyId})
       : super(key: key);
   @override
   _ShowResultState createState() => _ShowResultState();
@@ -44,8 +43,9 @@ class _ShowResultState extends State<ShowResult> {
 
       }
 
-  //  print();
+    print(widget.backResult);
     return Scaffold(
+
       key: _scaffoldKey,
       body: SafeArea(
           child: Center(
@@ -81,49 +81,50 @@ class _ShowResultState extends State<ShowResult> {
               child: MaterialButton(
                 onPressed: () async {
 //                  _scaffoldKey.currentState.showSnackBar(
-//                      SnackBar(content: Text("downloading .....")));
-                   final DateTime now = DateTime. now();
-                   final DateFormat formatter = DateFormat('yyyy-MM-dd');
-                  final String formattedDate = formatter. format(now);
-                  final database = await Provider.of<AppDatabase>(
+////                      SnackBar(content: Text("downloading .....")));
+//                 final static DateTime now=DateTime.now();
+//                  final DateFormat formatter = DateFormat('yyyy-MM-dd');
+
+
+                  final database =  Provider.of<AppDatabase>(
                       context,
                       listen: false);
 
                   var response =
-                  database.insertResults(Result(response: ResultResponses(
+                  await database.insertResults(Result(response: ResultResponses(
                     description: Description(
-                      finalScore: widget.finalScore.toString(),
+                      finalScore: finalScore.toString(),
                       town: widget.town,
                       surveyId: widget.surveyId,
                       googleLocation: widget.googleLocation,
                       surveyName: widget.surveyName,
-                      dateOfSubmission: formattedDate
+                     // dateOfSubmission: "$now"
 
 
                     ),
-                    results: widget.results
+                    responses: widget.backResult
                   )));
 
-                  response.catchError(
-                        (e) => _scaffoldKey.currentState.showSnackBar(
-                      SnackBar(
-                        content: Text("${e.toString()}"),
-                      ),
-                    ),
-                  );
-                  response.whenComplete(
-                        () => _scaffoldKey.currentState.showSnackBar(
-                      SnackBar(
-                        content: Text("done"),
-                        action: SnackBarAction(
-                          label: 'OK',
-                          onPressed: () {
-                            // Some code to undo the change.
-                          },
-                        ),
-                      ),
-                    ),
-                  );
+//                  response.catchError(
+//                        (e) => _scaffoldKey.currentState.showSnackBar(
+//                      SnackBar(
+//                        content: Text("${e.toString()}"),
+//                      ),
+//                    ),
+//                  );
+//                  response.whenComplete(
+//                        () => _scaffoldKey.currentState.showSnackBar(
+//                      SnackBar(
+//                        content: Text("done"),
+//                        action: SnackBarAction(
+//                          label: 'OK',
+//                          onPressed: () {
+//                            // Some code to undo the change.
+//                          },
+//                        ),
+//                      ),
+//                    ),
+//                  );
 
                   Navigator.pushReplacement(
                     context,

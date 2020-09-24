@@ -18,7 +18,12 @@ class Results extends Table {
   TextColumn get response => text().map(const ResultResponsesConverter()).nullable()();
 }
 
-@UseMoor(tables: [Datums,Results])
+class Tokens extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get token => text().nullable()();
+}
+
+@UseMoor(tables: [Datums,Results,Tokens])
 class AppDatabase extends _$AppDatabase {
   AppDatabase()
       : super(FlutterQueryExecutor.inDatabaseFolder(
@@ -46,4 +51,9 @@ class AppDatabase extends _$AppDatabase {
   Future insertResults(Result result) => into(results).insert(result);
   Future updateResults(Result result) => update(results).replace(result);
   Future deleteResults(Result result) => delete(results).delete(result);
+
+  Future insertToken(Token token) => into(tokens).insert(token);
+  Future deleteToken(Token token) => delete(tokens).delete(token);
+  Future<Token> getToken() => select(tokens).getSingle();
+
 }

@@ -226,6 +226,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   content: Text(
                                                       "Please wait ....")));
                                           String responseToken = response.body;
+
                                           share.setString(
                                               "token", responseToken);
                                           share.setString("rememberMe", "rememberMe");
@@ -236,12 +237,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       HomeScreen(
                                                         token:responseToken ,
                                                       )));
-                                        } else {
-
-                                          _scaffoldKey.currentState
-                                              .showSnackBar(SnackBar(
-                                                  content: Text(
-                                                      "Email or password is not correct !")));
                                         }
                                         //  print(response.headers);
                                         print(response.body);
@@ -266,12 +261,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 .login(loginModel);
                                         if (response.statusCode == 200 ||
                                             response.statusCode == 201) {
+
                                           share.setString('token', response.body);
                                           _scaffoldKey.currentState
                                               .showSnackBar(SnackBar(
                                                   content: Text(
                                                       "Please wait ....")));
                                           String responseToken = response.body;
+
                                           share.setString(
                                               "token", responseToken);
                                           share.setString("rememberMe", "rememberMe");

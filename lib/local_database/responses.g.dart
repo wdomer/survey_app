@@ -11,9 +11,9 @@ ResultResponses _$ResultResponsesFromJson(Map<String, dynamic> json) {
     description: json['description'] == null
         ? null
         : Description.fromJson(json['description'] as Map<String, dynamic>),
-    results: (json['results'] as List)
+    responses: (json['responses'] as List)
         ?.map((e) =>
-            e == null ? null : AllResults.fromJson(e as Map<String, dynamic>))
+            e == null ? null : BackResults.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   );
 }
@@ -21,5 +21,5 @@ ResultResponses _$ResultResponsesFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$ResultResponsesToJson(ResultResponses instance) =>
     <String, dynamic>{
       'description': instance.description,
-      'results': instance.results,
+      'responses': instance.responses,
     };

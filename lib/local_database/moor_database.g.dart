@@ -385,14 +385,201 @@ class $ResultsTable extends Results with TableInfo<$ResultsTable, Result> {
       const ResultResponsesConverter();
 }
 
+class Token extends DataClass implements Insertable<Token> {
+  final int id;
+  final String token;
+  Token({@required this.id, this.token});
+  factory Token.fromData(Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    final stringType = db.typeSystem.forDartType<String>();
+    return Token(
+      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      token:
+          stringType.mapFromDatabaseResponse(data['${effectivePrefix}token']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || id != null) {
+      map['id'] = Variable<int>(id);
+    }
+    if (!nullToAbsent || token != null) {
+      map['token'] = Variable<String>(token);
+    }
+    return map;
+  }
+
+  TokensCompanion toCompanion(bool nullToAbsent) {
+    return TokensCompanion(
+      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      token:
+          token == null && nullToAbsent ? const Value.absent() : Value(token),
+    );
+  }
+
+  factory Token.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return Token(
+      id: serializer.fromJson<int>(json['id']),
+      token: serializer.fromJson<String>(json['token']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'token': serializer.toJson<String>(token),
+    };
+  }
+
+  Token copyWith({int id, String token}) => Token(
+        id: id ?? this.id,
+        token: token ?? this.token,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('Token(')
+          ..write('id: $id, ')
+          ..write('token: $token')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(id.hashCode, token.hashCode));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is Token && other.id == this.id && other.token == this.token);
+}
+
+class TokensCompanion extends UpdateCompanion<Token> {
+  final Value<int> id;
+  final Value<String> token;
+  const TokensCompanion({
+    this.id = const Value.absent(),
+    this.token = const Value.absent(),
+  });
+  TokensCompanion.insert({
+    this.id = const Value.absent(),
+    this.token = const Value.absent(),
+  });
+  static Insertable<Token> custom({
+    Expression<int> id,
+    Expression<String> token,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (token != null) 'token': token,
+    });
+  }
+
+  TokensCompanion copyWith({Value<int> id, Value<String> token}) {
+    return TokensCompanion(
+      id: id ?? this.id,
+      token: token ?? this.token,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (token.present) {
+      map['token'] = Variable<String>(token.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TokensCompanion(')
+          ..write('id: $id, ')
+          ..write('token: $token')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $TokensTable extends Tokens with TableInfo<$TokensTable, Token> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $TokensTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  GeneratedIntColumn _id;
+  @override
+  GeneratedIntColumn get id => _id ??= _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn('id', $tableName, false,
+        hasAutoIncrement: true, declaredAsPrimaryKey: true);
+  }
+
+  final VerificationMeta _tokenMeta = const VerificationMeta('token');
+  GeneratedTextColumn _token;
+  @override
+  GeneratedTextColumn get token => _token ??= _constructToken();
+  GeneratedTextColumn _constructToken() {
+    return GeneratedTextColumn(
+      'token',
+      $tableName,
+      true,
+    );
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [id, token];
+  @override
+  $TokensTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'tokens';
+  @override
+  final String actualTableName = 'tokens';
+  @override
+  VerificationContext validateIntegrity(Insertable<Token> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+    }
+    if (data.containsKey('token')) {
+      context.handle(
+          _tokenMeta, token.isAcceptableOrUnknown(data['token'], _tokenMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  Token map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return Token.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $TokensTable createAlias(String alias) {
+    return $TokensTable(_db, alias);
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   $DatumsTable _datums;
   $DatumsTable get datums => _datums ??= $DatumsTable(this);
   $ResultsTable _results;
   $ResultsTable get results => _results ??= $ResultsTable(this);
+  $TokensTable _tokens;
+  $TokensTable get tokens => _tokens ??= $TokensTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [datums, results];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [datums, results, tokens];
 }

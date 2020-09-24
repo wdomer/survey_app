@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:survey_app/common/AppColors.dart';
+import 'package:survey_app/local_database/moor_database.dart';
 import 'package:survey_app/screens/download_form_screen.dart';
 import 'package:survey_app/screens/home_screen/component/HomeScreenCard.dart';
 import 'file:///C:/flutter_project/survey_app/lib/screens/saved_surveys_screen/saved_surveys_screen.dart';
@@ -14,6 +17,8 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -50,13 +55,19 @@ class _BodyState extends State<Body> {
               child: Column(
                 children: <Widget>[
                   HomeScreenCard(
-                    onClick: () {
+                    onClick: () async{
+                    SharedPreferences share=await SharedPreferences.getInstance();
+                    String token=share.getString("token");
+                    print(token);
+                    if(token!=null) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => DownloadFormScreen(
-                                token:widget.token,
-                              )));
+                              builder: (context) =>
+                                  DownloadFormScreen(
+                                    token: token,
+                                  )));
+                    }
                     },
                     icon: "assets/svg/download_form.svg",
                     title: "DownLoad Forms",

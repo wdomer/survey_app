@@ -8,7 +8,6 @@ part of 'description.dart';
 
 Description _$DescriptionFromJson(Map<String, dynamic> json) {
   return Description(
-    dateOfSubmission: json['dateOfSubmission'] as String,
     finalScore: json['finalScore'] as String,
     googleLocation: json['googleLocation'] as String,
     surveyId: json['surveyId'] as int,
@@ -19,7 +18,6 @@ Description _$DescriptionFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$DescriptionToJson(Description instance) =>
     <String, dynamic>{
-      'dateOfSubmission': instance.dateOfSubmission,
       'finalScore': instance.finalScore,
       'googleLocation': instance.googleLocation,
       'surveyId': instance.surveyId,

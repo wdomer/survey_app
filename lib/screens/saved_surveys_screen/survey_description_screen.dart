@@ -49,7 +49,6 @@ class _SurveyDescriptionScreenState extends State<SurveyDescriptionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // print(data);
     return Scaffold(
         appBar: AppBar(
           title: Text("Survey Description"),
@@ -120,7 +119,8 @@ class _SurveyDescriptionScreenState extends State<SurveyDescriptionScreen> {
                                   question: widget.data.question,
                                   googleLocation:"{$latitude,$longitude,438.5}" ,
                                   surveyName: widget.data.name,
-                                  town: _townController.text
+                                  town: _townController.text,
+                                  surveyId:widget.data.id
                               ),
                             ),
                           );

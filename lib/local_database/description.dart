@@ -5,7 +5,7 @@ part 'description.g.dart';
 
 @j.JsonSerializable()
 class Description{
-   String dateOfSubmission;
+  // String dateOfSubmission;
    String finalScore;
    String googleLocation;
    int surveyId;
@@ -13,7 +13,7 @@ class Description{
    String town;
 
    Description({
-      this.dateOfSubmission,
+    //  this.dateOfSubmission,
       this.finalScore,
       this.googleLocation,
       this.surveyId,
