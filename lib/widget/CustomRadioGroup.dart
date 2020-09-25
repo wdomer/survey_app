@@ -4,6 +4,7 @@ import 'package:survey_app/local_database/back_result.dart';
 import 'package:survey_app/local_database/results.dart';
 import 'package:survey_app/screens/saved_surveys_screen/show_result.dart';
 import 'package:survey_app/widget/my_radio_button_group.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 
 class CustomRadioGroup extends StatefulWidget {
@@ -199,7 +200,7 @@ class __CustomRadioGroupState extends State<CustomRadioGroup> {
                       }
                     }
                   },
-                  child: Text("Next"),
+                  child: Text("Next").tr(context:context),
                 ),
               ),
             )

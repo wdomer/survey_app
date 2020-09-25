@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:survey_app/common/AppColors.dart';
 import 'package:survey_app/local_database/moor_database.dart';
 import 'package:survey_app/services/response_services.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -35,7 +36,7 @@ class _BodyState extends State<Body> {
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1),
-            ),
+            ).tr(),
           ),
         ),
         Positioned(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:survey_app/common/AppColors.dart';
 import 'package:survey_app/screens/account_screen/components/AccountScreenCard.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -31,7 +32,7 @@ class _BodyState extends State<Body> {
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1),
-            ),
+            ).tr(),
           ),
         ),
         Positioned(
@@ -77,24 +78,20 @@ class _BodyState extends State<Body> {
                           fontSize: 22,
                           color: loginBtnColor,
                           fontWeight: FontWeight.bold),
-                    ),
+                    ).tr(context: context),
                   ),
                   AccountScreenCard(
-                    title: "User Name :",
-                    subtitle: "Edit Your User Name",
+                    title: "User Name :".tr(),
+                    subtitle: "Edit Your User Name".tr(),
                   ),
                   AccountScreenCard(
-                    title: "Email :",
+                    title: "Email :".tr(),
                     subtitle: "Edit Your Email",
                   ),
                   AccountScreenCard(
-                    title: "Mobile Number :",
+                    title: "Mobile Number :".tr(),
                     subtitle: "+249 1234 567 890",
                   ),
-                  AccountScreenCard(
-                    title: "User Name :",
-                    subtitle: "Edit Your User Name",
-                  )
                 ],
               ),
             ),

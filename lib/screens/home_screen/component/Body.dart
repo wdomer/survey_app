@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:survey_app/common/AppColors.dart';
-import 'package:survey_app/local_database/moor_database.dart';
 import 'package:survey_app/screens/download_form_screen.dart';
 import 'package:survey_app/screens/home_screen/component/HomeScreenCard.dart';
 import 'file:///C:/flutter_project/survey_app/lib/screens/saved_surveys_screen/saved_surveys_screen.dart';
 import 'package:survey_app/screens/survey_screen/SurveyScreen.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Body extends StatefulWidget {
   final String token;
@@ -32,8 +31,8 @@ class _BodyState extends State<Body> {
         ),
         Positioned(
           top: 40,
-          left: 120,
-          right: 120,
+          left: 100,
+          right: 100,
           child: Center(
             child: Text(
               "HOME",
@@ -42,7 +41,7 @@ class _BodyState extends State<Body> {
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1),
-            ),
+            ).tr(),
           ),
         ),
         Positioned(
@@ -70,8 +69,8 @@ class _BodyState extends State<Body> {
                     }
                     },
                     icon: "assets/svg/download_form.svg",
-                    title: "DownLoad Forms",
-                    subtitle: "10",
+                    title: "DownLoad Forms".tr(),
+                    subtitle: "",
                   ),
                   HomeScreenCard(
                     onClick: () {
@@ -81,8 +80,8 @@ class _BodyState extends State<Body> {
                               builder: (context) => SavedSurveysScreen()));
                     },
                     icon: "assets/svg/fill_form.svg",
-                    title: "Fill Forms",
-                    subtitle: "5",
+                    title: "Fill Forms".tr(),
+                    subtitle: "",
                   ),
                   HomeScreenCard(
                     onClick: () {
@@ -94,8 +93,8 @@ class _BodyState extends State<Body> {
                       );
                     },
                     icon: "assets/svg/saved_response.svg",
-                    title: "Saved Response",
-                    subtitle: "2",
+                    title: "Saved Response".tr(),
+                    subtitle: "",
                   ),
                 ],
               ),

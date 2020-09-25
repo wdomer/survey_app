@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:survey_app/local_database/moor_database.dart';
@@ -18,9 +19,11 @@ String rememberMe = sharedPreferences.getString('rememberMe');
   runApp(
 
   EasyLocalization(
+
     supportedLocales: [
       Locale('en', 'US'),
       Locale('ar', 'EG'),
+
     ],
     path: 'resources/langs',
     child: MyApp(
@@ -65,6 +68,13 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
             //  primarySwatch: loginBgColor,
             ),
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          EasyLocalization.of(context).delegate,
+        ],
+        supportedLocales: EasyLocalization.of(context).supportedLocales,
+        locale: EasyLocalization.of(context).locale,
         home:
         rememberMe==null?
             LoginScreen():

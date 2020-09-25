@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:survey_app/local_database/all_surveys.dart';
 import 'package:survey_app/local_database/moor_database.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:survey_app/services/surveys_all_services_local.dart';
 
 class DownloadFormScreen extends StatefulWidget {
@@ -117,7 +117,7 @@ class _DownloadFormScreenState extends State<DownloadFormScreen> {
                               RichText(
                                 textAlign: TextAlign.start,
                                 text: TextSpan(
-                                  text: "Created on  ",
+                                  text: "Created on  ".tr(),
                                   style: TextStyle(
                                     color: Colors.black45,
                                     fontSize: 12,
@@ -138,7 +138,7 @@ class _DownloadFormScreenState extends State<DownloadFormScreen> {
                       InkWell(
                         onTap: () async {
                           _scaffoldKey.currentState.showSnackBar(
-                              SnackBar(content: Text("downloading .....")));
+                              SnackBar(content: Text("downloading .....").tr()));
                           final database = await Provider.of<AppDatabase>(
                               context,
                               listen: false);
@@ -155,9 +155,9 @@ class _DownloadFormScreenState extends State<DownloadFormScreen> {
                           response.whenComplete(
                             () => _scaffoldKey.currentState.showSnackBar(
                               SnackBar(
-                                content: Text("done"),
+                                content: Text("done").tr(context: context),
                                 action: SnackBarAction(
-                                  label: 'OK',
+                                  label: 'OK'.tr(),
                                   onPressed: () {
                                     // Some code to undo the change.
                                   },

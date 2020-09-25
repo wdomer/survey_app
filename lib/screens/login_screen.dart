@@ -5,6 +5,7 @@ import 'package:survey_app/common/AppColors.dart';
 import 'package:survey_app/models/login_model.dart';
 import 'package:survey_app/screens/home_screen/HomeScreen.dart';
 import 'package:survey_app/services/login_services.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -132,10 +133,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                         if (v.contains('@')) {
                                           return null;
                                         }
-                                        return "Please your email";
+                                        return "Please your email".tr();
                                       },
                                       decoration: InputDecoration(
-                                          hintText: "Email",
+                                          hintText: "Email".tr(),
                                           hintStyle: TextStyle(
                                               letterSpacing: 1,
                                               color: Colors.white,
@@ -167,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           TextInputType.visiblePassword,
                                       validator: (v) {
                                         if (v.isEmpty) {
-                                          return "Please your password";
+                                          return "Please your password".tr();
                                         }
                                         return null;
                                       },
@@ -200,14 +201,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                         _scaffoldKey.currentState.showSnackBar(
                                             SnackBar(
                                                 content: Text(
-                                                    "Email and Password is required")));
+                                                    "Email and Password is required".tr())));
                                       }
                                       if (_formKey.currentState.validate() &&
                                           _rememberMe == true) {
                                         _scaffoldKey.currentState.showSnackBar(
                                             SnackBar(
                                                 content: Text(
-                                                    "Email and Password is required")));
+                                                    "Email and Password is required".tr())));
 
                                         LoginModel loginModel = LoginModel(
                                           device_name: "android",
@@ -225,7 +226,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           _scaffoldKey.currentState
                                               .showSnackBar(SnackBar(
                                                   content: Text(
-                                                      "Please wait ....")));
+                                                      "Please wait ....".tr())));
                                           String responseToken = response.body;
 
                                           share.setString(
@@ -285,12 +286,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                           _scaffoldKey.currentState
                                               .showSnackBar(SnackBar(
                                                   content: Text(
-                                                      "Email or password is not correct !")));
+                                                      "Email or password is not correct !".tr())));
                                         }
                                       }
                                     },
                                     child: Text(
-                                      "JOIN",
+                                      "JOIN".tr(),
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   )
@@ -330,7 +331,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                     ),
                                     Text(
-                                      "Remember me",
+                                      "Remember me".tr(),
                                       style: TextStyle(color: Colors.white),
                                     )
                                   ],
@@ -338,7 +339,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               Container(
                                 child: Text(
-                                  "Forget my password",
+                                  "Forget my password".tr(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       decoration: TextDecoration.underline,

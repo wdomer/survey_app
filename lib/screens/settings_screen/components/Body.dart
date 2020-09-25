@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:survey_app/common/AppColors.dart';
+import 'package:survey_app/common/language_view.dart';
 import 'package:survey_app/screens/login_screen.dart';
 import 'package:survey_app/screens/settings_screen/change_password_screen.dart';
 import 'package:survey_app/screens/settings_screen/components/SettingsScreenCard.dart';
@@ -34,7 +36,7 @@ class _BodyState extends State<Body> {
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1),
-            ),
+            ).tr(),
           ),
         ),
         Positioned(
@@ -57,7 +59,7 @@ class _BodyState extends State<Body> {
                     ),
                     SettingsScreenCard(
                       icon: "assets/svg/notifications.svg",
-                      title: "Notifications",
+                      title: "Notifications".tr(),
                     ),
                   ],
                 ),
@@ -79,7 +81,7 @@ class _BodyState extends State<Body> {
                     ),
                     SettingsScreenCard(
                       icon: "assets/svg/help.svg",
-                      title: "Help &\nSupport",
+                      title: "Help &\nSupport".tr(),
                     ),
                   ],
                 ),
@@ -90,15 +92,22 @@ class _BodyState extends State<Body> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     SettingsScreenCard(
+                      tapped: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => LanguageView(), fullscreenDialog: true),
+                        );
+                      },
                       icon: "assets/svg/language.svg",
-                      title: "Language",
+                      title: "Language".tr(),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     SettingsScreenCard(
                       icon: "assets/svg/help.svg",
-                      title: "About",
+                      title: "About".tr(),
                     ),
                   ],
                 ),
@@ -155,7 +164,7 @@ class _BodyState extends State<Body> {
                   // letterSpacing: 1,
                   color: unselectedItemColor,
                 ),
-              ),
+              ).tr(),
             ),
           ],
         ),

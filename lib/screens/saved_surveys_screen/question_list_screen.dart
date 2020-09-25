@@ -4,6 +4,7 @@ import 'package:survey_app/local_database/Question.dart';
 import 'package:survey_app/local_database/back_result.dart';
 import 'package:survey_app/local_database/description.dart';
 import 'package:survey_app/widget/CustomRadioGroup.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class QuestionListScreen extends StatefulWidget {
   final List<Question> question;

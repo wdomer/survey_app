@@ -7,6 +7,7 @@ import 'package:survey_app/screens/home_screen/HomeScreen.dart';
 import 'package:survey_app/screens/login_screen.dart';
 import 'package:survey_app/screens/settings_screen/SettingsScreen.dart';
 import 'package:survey_app/screens/survey_screen/SurveyScreen.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DrawerWidget extends StatelessWidget {
   @override
@@ -39,13 +40,13 @@ class DrawerWidget extends StatelessWidget {
                         height: MediaQuery.of(context).size.height / 30,
                       ),
                       DrawerList(
-                        title: "Home" ,
+                        title: "Home".tr() ,
                         icon: "home.svg",
                         tapped: ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen())),
                       ),
 
                       DrawerList(
-                        title: "Account" ,
+                        title: "Account".tr() ,
                         icon: "person.svg",
                         tapped: ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AccountScreen())),
                       ),
@@ -156,7 +157,7 @@ class DrawerWidget extends StatelessWidget {
               fontSize: 22,
               fontWeight: FontWeight.bold,
               letterSpacing: 1),
-        )
+        ).tr()
       ],
     );
   }

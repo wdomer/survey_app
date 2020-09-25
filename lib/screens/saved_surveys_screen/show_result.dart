@@ -5,6 +5,7 @@ import 'package:survey_app/local_database/description.dart';
 import 'package:survey_app/local_database/moor_database.dart';
 import 'package:survey_app/local_database/responses.dart';
 import 'package:survey_app/screens/home_screen/HomeScreen.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ShowResult extends StatefulWidget {
   //final double percentage;
@@ -134,7 +135,7 @@ class _ShowResultState extends State<ShowResult> {
                   );
                 },
                 color: Colors.grey,
-                child: Text("Done !!"),
+                child: Text("Done !!").tr(context: context),
               ),
             ),
           )

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:survey_app/local_database/moor_database.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:survey_app/screens/saved_surveys_screen/survey_description_screen.dart';
 
 class SavedSurveysScreen extends StatelessWidget {
@@ -34,7 +35,7 @@ class SavedSurveysScreen extends StatelessWidget {
                     child: Text("No Surveys Saved",style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold
-                    ),),
+                    ),).tr(context: context),
                   );
                 }
               } else {
@@ -90,7 +91,7 @@ class SavedSurveysScreen extends StatelessWidget {
                             RichText(
                               textAlign: TextAlign.start,
                               text: TextSpan(
-                                text: "Created on  ",
+                                text: "Created on  ".tr(),
                                 style: TextStyle(
                                   color: Colors.black45,
                                   fontSize: 12,

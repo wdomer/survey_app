@@ -3,6 +3,7 @@ import 'package:survey_app/local_database/data.dart';
 import 'package:survey_app/local_database/responses.dart';
 import 'package:survey_app/screens/saved_surveys_screen/question_list_screen.dart';
 import 'package:survey_app/widget/map_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SurveyDescriptionScreen extends StatefulWidget {
   final DataModel data;
@@ -51,7 +52,7 @@ class _SurveyDescriptionScreenState extends State<SurveyDescriptionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Survey Description"),
+          title: Text("Survey Description").tr(context: context),
         ),
         body: Form(
           key: _descriptionFormKey,
@@ -63,7 +64,7 @@ class _SurveyDescriptionScreenState extends State<SurveyDescriptionScreen> {
                 child: TextFormField(
                   controller: _townController,
                   decoration: new InputDecoration(
-                    hintText: "Town Name",
+                    hintText: "Town Name".tr(),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey, width: 1.0),
                     ),
@@ -76,7 +77,7 @@ class _SurveyDescriptionScreenState extends State<SurveyDescriptionScreen> {
                   ),
                   validator: (value) {
                     if (value.isEmpty) {
-                      return "Enter Town Name";
+                      return "Enter Town Name".tr();
                     }
                     return null;
                   },
@@ -87,7 +88,7 @@ class _SurveyDescriptionScreenState extends State<SurveyDescriptionScreen> {
               ),
               Container(
                 margin: EdgeInsets.all(10),
-                child: Text("Choose Location"),
+                child: Text("Choose Location").tr(context:context),
               ),
               SizedBox(
                 height: 10,
@@ -129,7 +130,7 @@ class _SurveyDescriptionScreenState extends State<SurveyDescriptionScreen> {
                       child: Text(
                         "Next",
                         style: TextStyle(color: Colors.white),
-                      ),
+                      ).tr(context: context),
                     ),
                   )
                 ],
