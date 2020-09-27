@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:survey_app/common/AppColors.dart';
 import 'package:survey_app/screens/account_screen/components/AccountScreenCard.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -39,26 +40,31 @@ class _BodyState extends State<Body> {
           left: MediaQuery.of(context).size.width / 2 - 50,
           right: MediaQuery.of(context).size.width / 2 - 50,
           top: 105,
-          child: Container(
-            height: 80,
-            width: 80,
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                colors: [
-                  gradientBegin,
-                  gradientend,
-                ],
-                begin: FractionalOffset(1.0, 1.0),
-                end: FractionalOffset(1.0, 0.0),
-                stops: [0.0, 1.0],
+          child: InkWell(
+            onTap: () async {
+              _asyncGetPhoto(context);
+            },
+            child: Container(
+              height: 80,
+              width: 80,
+              padding: EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  colors: [
+                    gradientBegin,
+                    gradientend,
+                  ],
+                  begin: FractionalOffset(1.0, 1.0),
+                  end: FractionalOffset(1.0, 0.0),
+                  stops: [0.0, 1.0],
+                ),
               ),
-            ),
-            child: SvgPicture.asset(
-              "assets/svg/person.svg",
-              height: 50,
-              width: 50,
+              child: SvgPicture.asset(
+                "assets/svg/person.svg",
+                height: 50,
+                width: 50,
+              ),
             ),
           ),
         ),
@@ -100,4 +106,62 @@ class _BodyState extends State<Body> {
       ],
     );
   }
+  //File _image;
+
+  final picker = ImagePicker();
+
+  Future getImage(ImageSource img, BuildContext context) async {
+    final pickedFile = await picker.getImage(
+      source: img,
+      imageQuality: 50, // <- Reduce Image quality
+      maxHeight: 500, // <- reduce the image size
+      maxWidth: 500,
+    );
+
+    setState(() {
+      if (pickedFile != null) {
+        // _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future<GetPhoto> _asyncGetPhoto(BuildContext context) async {
+    return await showDialog<GetPhoto>(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: const Text('Select From ... ').tr(context: context),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(32.0))),
+            contentPadding: EdgeInsets.only(top: 10.0),
+            children: <Widget>[
+              SimpleDialogOption(
+                onPressed: () {
+                  getImage(ImageSource.camera, context);
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'Camera',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ).tr(context: context),
+              ),
+              SimpleDialogOption(
+                onPressed: () {
+                  getImage(ImageSource.gallery, context);
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'Gallery',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ).tr(context: context),
+              ),
+            ],
+          );
+        });
+  }
 }
+
+enum GetPhoto { camera, gallery }

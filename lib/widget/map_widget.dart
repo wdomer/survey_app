@@ -3,9 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-
 class MapWidget extends StatefulWidget {
- final Function onTap;
+  final Function onTap;
 
   const MapWidget({Key key, this.onTap}) : super(key: key);
   @override
@@ -14,6 +13,7 @@ class MapWidget extends StatefulWidget {
 
 class MapWidgetState extends State<MapWidget> {
   Completer<GoogleMapController> _controller = Completer();
+  GoogleMapController _googleMapController;
 
   static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(15.5007, 32.5599),
@@ -24,31 +24,31 @@ class MapWidgetState extends State<MapWidget> {
       bearing: 192.8334901395799,
       target: LatLng(15.5007, 32.5599),
       tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+      zoom: 50.0);
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       body: GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-          onTap: (latLng) {
-          widget.onTap("${latLng.latitude}","${latLng.longitude}");
-            print('${latLng.latitude}, ${latLng.longitude}');
-          }
-      ),
+          mapType: MapType.normal,
+          initialCameraPosition: _kGooglePlex,
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+          },
+          zoomControlsEnabled: true,
+          scrollGesturesEnabled: true,
 
+          onTap: (latLng) {
+            widget.onTap("${latLng.latitude}", "${latLng.longitude}");
+
+            print('${latLng.latitude}, ${latLng.longitude}');
+          }),
     );
   }
 
 //
 
-
 }
-
 
 //_controller.**onMarkerTapped**.add((marker){
 //
@@ -57,7 +57,6 @@ class MapWidgetState extends State<MapWidget> {
 //  String longitude= marker.options.position.longitude.toString();
 //
 //  });
-
 
 //      floatingActionButton: FloatingActionButton.extended(
 //        onPressed: _goToTheLake,

@@ -45,15 +45,26 @@ class AccountScreenCard extends StatelessWidget {
                       height: 5,
                     ),
                     Center(
-                      child: Text(
-                        subtitle,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            color: Color(0xff5bb8da),
-                            fontSize: 22,
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: 1),
-                      ),
+                      child:TextField(
+                        textAlign: TextAlign.center,
+                        decoration: new InputDecoration(
+                          hintText: subtitle,
+
+                          enabledBorder:InputBorder.none,
+                          focusedBorder:InputBorder.none,
+                          border: InputBorder.none,
+                        ),
+                      )
+
+//                      Text(
+//                        subtitle,
+//                        overflow: TextOverflow.ellipsis,
+//                        style: TextStyle(
+//                            color: Color(0xff5bb8da),
+//                            fontSize: 22,
+//                            fontWeight: FontWeight.w500,
+//                            letterSpacing: 1),
+//                      ),
                     ),
                   ]),
             ),

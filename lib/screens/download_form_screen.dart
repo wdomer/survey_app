@@ -16,16 +16,16 @@ class DownloadFormScreen extends StatefulWidget {
 
 class _DownloadFormScreenState extends State<DownloadFormScreen> {
   bool isloading = false;
-  String token ;
-    final _scaffoldKey = GlobalKey<ScaffoldState>();
+  String token;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-    void getToken() async{
-      SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+  void getToken() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-      token=sharedPreferences.getString('token');
+    token = sharedPreferences.getString('token');
+  }
 
-    }
-    @override
+  @override
   void initState() {
     super.initState();
     getToken();
@@ -33,41 +33,43 @@ class _DownloadFormScreenState extends State<DownloadFormScreen> {
 
   @override
   Widget build(BuildContext context) {
-      print("token/////////////////////////////");
-      print(widget.token);
+    print("token/////////////////////////////");
+    print(widget.token);
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey,
         body: Container(
           child: Container(
-            child:widget.token!=null? FutureBuilder(
-              future: Provider.of<SurveysAllServicesLocal>(context)
-                  .getSurveysLocal("Bearer ${widget.token}", 0),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasError) {
-                    print(snapshot.error);
-                    return Center(
-                      child: Text(
-                        snapshot.error.toString(),
-                      ),
-                    );
-                  } else {
-                    final response = snapshot.data.body;
+            child: widget.token != null
+                ? FutureBuilder(
+                    future: Provider.of<SurveysAllServicesLocal>(context)
+                        .getSurveysLocal("Bearer ${widget.token}", 0),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          print(snapshot.error);
+                          return Center(
+                            child: Text(
+                              snapshot.error.toString(),
+                            ),
+                          );
+                        } else {
+                          final response = snapshot.data.body;
 
-                    var survey = AllSurveys.fromJson(response);
-                    var dataModel = survey.surveys.data;
-                    return _buildList(context, dataModel);
-                  }
-                } else {
-                  return Center(
+                          var survey = AllSurveys.fromJson(response);
+                          var dataModel = survey.surveys.data;
+                          return _buildList(context, dataModel);
+                        }
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
+                  )
+                : Center(
                     child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            ):Center(
-              child: CircularProgressIndicator(),
-            ),
+                  ),
           ),
         ),
       ),
@@ -137,8 +139,8 @@ class _DownloadFormScreenState extends State<DownloadFormScreen> {
                       ),
                       InkWell(
                         onTap: () async {
-                          _scaffoldKey.currentState.showSnackBar(
-                              SnackBar(content: Text("downloading .....").tr()));
+                          _scaffoldKey.currentState.showSnackBar(SnackBar(
+                              content: Text("downloading .....").tr()));
                           final database = await Provider.of<AppDatabase>(
                               context,
                               listen: false);

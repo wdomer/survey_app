@@ -109,193 +109,194 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: loginTextFieldBox),
                             child: Form(
                               key: _formKey,
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: 5, horizontal: 10),
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 10),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          width: 1,
-                                          color: loginTextFieldBorderColor),
-                                      borderRadius: BorderRadius.circular(10),
-                                      // color: bgColor,
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    Container(
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: 5, horizontal: 10),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 10),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            width: 1,
+                                            color: loginTextFieldBorderColor),
+                                        borderRadius: BorderRadius.circular(10),
+                                        // color: bgColor,
+                                      ),
+                                      child: TextFormField(
+                                        controller: _emailController,
+                                        style: TextStyle(color: Colors.white),
+                                        validator: (v) {
+                                          if (v.contains('@')) {
+                                            return null;
+                                          }
+                                          return "Please your email".tr();
+                                        },
+                                        decoration: InputDecoration(
+                                            hintText: "Email".tr(),
+                                            hintStyle: TextStyle(
+                                                letterSpacing: 1,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w700),
+                                            enabledBorder: InputBorder.none,
+                                            focusedBorder: InputBorder.none,
+                                            prefixIcon: Icon(
+                                              Icons.email,
+                                              color: loginBtnColor,
+                                            )),
+                                      ),
                                     ),
-                                    child: TextFormField(
-                                      controller: _emailController,
-                                      style: TextStyle(color: Colors.white),
-                                      validator: (v) {
-                                        if (v.contains('@')) {
+                                    Container(
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: 5, horizontal: 10),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 10),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            width: 1,
+                                            color: loginTextFieldBorderColor),
+                                        borderRadius: BorderRadius.circular(10),
+                                        // color: bgColor,
+                                      ),
+                                      child: TextFormField(
+                                        obscureText: true,
+                                        controller: _passwordController,
+                                        keyboardType:
+                                            TextInputType.visiblePassword,
+                                        validator: (v) {
+                                          if (v.isEmpty) {
+                                            return "Please your password".tr();
+                                          }
                                           return null;
+                                        },
+                                        style: TextStyle(color: Colors.white),
+                                        decoration: InputDecoration(
+                                            hintText: "***********",
+                                            hintStyle: TextStyle(
+                                                letterSpacing: 2,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w700),
+                                            enabledBorder: InputBorder.none,
+                                            focusedBorder: InputBorder.none,
+                                            prefixIcon: Icon(
+                                              Icons.lock_outline,
+                                              color: loginBtnColor,
+                                            )),
+                                      ),
+                                    ),
+                                    MaterialButton(
+                                      // padding: EdgeInsets.all(12),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(5)),
+                                      color: loginBtnColor,
+                                      onPressed: () async {
+                                        SharedPreferences share =
+                                        await SharedPreferences
+                                            .getInstance();
+                                        if (!_formKey.currentState.validate()) {
+                                          _scaffoldKey.currentState.showSnackBar(
+                                              SnackBar(
+                                                  content: Text(
+                                                      "Email and Password is required".tr())));
                                         }
-                                        return "Please your email".tr();
-                                      },
-                                      decoration: InputDecoration(
-                                          hintText: "Email".tr(),
-                                          hintStyle: TextStyle(
-                                              letterSpacing: 1,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w700),
-                                          enabledBorder: InputBorder.none,
-                                          focusedBorder: InputBorder.none,
-                                          prefixIcon: Icon(
-                                            Icons.email,
-                                            color: loginBtnColor,
-                                          )),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: 5, horizontal: 10),
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 10),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          width: 1,
-                                          color: loginTextFieldBorderColor),
-                                      borderRadius: BorderRadius.circular(10),
-                                      // color: bgColor,
-                                    ),
-                                    child: TextFormField(
-                                      obscureText: true,
-                                      controller: _passwordController,
-                                      keyboardType:
-                                          TextInputType.visiblePassword,
-                                      validator: (v) {
-                                        if (v.isEmpty) {
-                                          return "Please your password".tr();
-                                        }
-                                        return null;
-                                      },
-                                      style: TextStyle(color: Colors.white),
-                                      decoration: InputDecoration(
-                                          hintText: "***********",
-                                          hintStyle: TextStyle(
-                                              letterSpacing: 2,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w700),
-                                          enabledBorder: InputBorder.none,
-                                          focusedBorder: InputBorder.none,
-                                          prefixIcon: Icon(
-                                            Icons.lock_outline,
-                                            color: loginBtnColor,
-                                          )),
-                                    ),
-                                  ),
-                                  MaterialButton(
-                                    // padding: EdgeInsets.all(12),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5)),
-                                    color: loginBtnColor,
-                                    onPressed: () async {
-                                      SharedPreferences share =
-                                      await SharedPreferences
-                                          .getInstance();
-                                      if (!_formKey.currentState.validate()) {
-                                        print("not vaild");
-                                        _scaffoldKey.currentState.showSnackBar(
-                                            SnackBar(
-                                                content: Text(
-                                                    "Email and Password is required".tr())));
-                                      }
-                                      if (_formKey.currentState.validate() &&
-                                          _rememberMe == true) {
-                                        _scaffoldKey.currentState.showSnackBar(
-                                            SnackBar(
-                                                content: Text(
-                                                    "Email and Password is required".tr())));
-
-                                        LoginModel loginModel = LoginModel(
-                                          device_name: "android",
-                                          email: _emailController.text,
-                                          password: _passwordController.text,
-                                          name: '',
-                                        );
-                                        final response =
-                                            await Provider.of<LoginServices>(
-                                                    context,
-                                                    listen: false)
-                                                .login(loginModel);
-                                        if (response.statusCode == 200 ||
-                                            response.statusCode == 201) {
-                                          _scaffoldKey.currentState
-                                              .showSnackBar(SnackBar(
+                                        if (_formKey.currentState.validate() &&
+                                            _rememberMe == true) {
+                                          _scaffoldKey.currentState.showSnackBar(
+                                              SnackBar(
                                                   content: Text(
                                                       "Please wait ....".tr())));
-                                          String responseToken = response.body;
 
-                                          share.setString(
-                                              "token", responseToken);
-                                          share.setString("rememberMe", "rememberMe");
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      HomeScreen(
-                                                        token:responseToken ,
-                                                      )));
-                                        }
-                                        //  print(response.headers);
-                                        print(response.body);
-                                        print(response.statusCode);
-                                        print(response.error);
+                                          LoginModel loginModel = LoginModel(
+                                            device_name: "android",
+                                            email: _emailController.text,
+                                            password: _passwordController.text,
+                                            name: '',
+                                          );
+                                          final response =
+                                              await Provider.of<LoginServices>(
+                                                      context,
+                                                      listen: false)
+                                                  .login(loginModel);
+                                          if (response.statusCode == 200 ||
+                                              response.statusCode == 201) {
+                                            _scaffoldKey.currentState
+                                                .showSnackBar(SnackBar(
+                                                    content: Text(
+                                                        "Please wait ....".tr())));
+                                            String responseToken = response.body;
+
+                                            share.setString(
+                                                "token", responseToken);
+                                            share.setString("rememberMe", "rememberMe");
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        HomeScreen(
+                                                          token:responseToken ,
+                                                        )));
+                                          }
+                                          //  print(response.headers);
+                                          print(response.body);
+                                          print(response.statusCode);
+                                          print(response.error);
 
 //
-                                      }
-                                      if ((_formKey.currentState.validate())) {
-
-
-                                        LoginModel loginModel = LoginModel(
-                                          device_name: "android",
-                                          email: _emailController.text,
-                                          password: _passwordController.text,
-                                          name: '',
-                                        );
-                                        final response =
-                                            await Provider.of<LoginServices>(
-                                                    context,
-                                                    listen: false)
-                                                .login(loginModel);
-                                        if (response.statusCode == 200 ||
-                                            response.statusCode == 201) {
-
-                                          share.setString('token', response.body);
-                                          _scaffoldKey.currentState
-                                              .showSnackBar(SnackBar(
-                                                  content: Text(
-                                                      "Please wait ....")));
-                                          String responseToken = response.body;
-
-                                          share.setString(
-                                              "token", responseToken);
-                                          share.setString("rememberMe", "rememberMe");
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      HomeScreen(
-                                                        token: responseToken,
-                                                      )));
-                                        } else {
-
-                                          _scaffoldKey.currentState
-                                              .showSnackBar(SnackBar(
-                                                  content: Text(
-                                                      "Email or password is not correct !".tr())));
                                         }
-                                      }
-                                    },
-                                    child: Text(
-                                      "JOIN".tr(),
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  )
-                                ],
+                                        if ((_formKey.currentState.validate())) {
+
+
+                                          LoginModel loginModel = LoginModel(
+                                            device_name: "android",
+                                            email: _emailController.text,
+                                            password: _passwordController.text,
+                                            name: '',
+                                          );
+                                          final response =
+                                              await Provider.of<LoginServices>(
+                                                      context,
+                                                      listen: false)
+                                                  .login(loginModel);
+                                          if (response.statusCode == 200 ||
+                                              response.statusCode == 201) {
+
+                                            share.setString('token', response.body);
+                                            _scaffoldKey.currentState
+                                                .showSnackBar(SnackBar(
+                                                    content: Text(
+                                                        "Please wait ....")));
+                                            String responseToken = response.body;
+
+                                            share.setString(
+                                                "token", responseToken);
+                                            share.setString("rememberMe", "rememberMe");
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        HomeScreen(
+                                                          token: responseToken,
+                                                        )));
+                                          } else {
+
+                                            _scaffoldKey.currentState
+                                                .showSnackBar(SnackBar(
+                                                    content: Text(
+                                                        "Email or password is not correct !".tr())));
+                                          }
+                                        }
+                                      },
+                                      child: Text(
+                                        "JOIN".tr(),
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),

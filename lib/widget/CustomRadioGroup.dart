@@ -103,9 +103,9 @@ class __CustomRadioGroupState extends State<CustomRadioGroup> {
               margin: EdgeInsets.all(10),
               child: Center(
                   child: Text(
-                "${widget.question.question}",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              )),
+                    "${widget.question.question}",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  )),
             ),
             SizedBox(
               height: 10,
@@ -153,7 +153,7 @@ class __CustomRadioGroupState extends State<CustomRadioGroup> {
                   color: Colors.grey,
                   onPressed: () async {
                     var key = widget.map.keys.firstWhere(
-                        (k) => widget.map[k] == _picked,
+                            (k) => widget.map[k] == _picked,
                         orElse: () => null);
                     double weight = double.parse(widget.question.weightage);
                     double doubleScore = double.parse(key);
@@ -161,46 +161,79 @@ class __CustomRadioGroupState extends State<CustomRadioGroup> {
                     double surveyFinalScore = 0;
                     BackResults result = BackResults(
                         questionId: widget.question.id,
-                     //   option: _picked,
+                        //   option: _picked,
                         score: key != null ? key : '0',
                         finalScore: finalScore.toString());
 
 
                     if (_picked != null) {
                       if (widget.index + 1 < widget.length) {
-                    //    _calculateResult();
+                        //    _calculateResult();
 
                         surveyFinalScore += finalScore;
                         widget.addScore(finalScore);
 
                         widget.next();
-                     //   results.add(result);
+                        //   results.add(result);
                         widget.addResult(result);
                         print(widget.finalResults.length);
                         print(widget.finalResults);
-                      //  print(key);
+                        //  print(key);
                       }
-                      if (widget.index + 1 == widget.length) {
-                     //   _calculateResult();
-                        surveyFinalScore += finalScore;
-                        widget.addResult(result);
-                        double percentageScore =
-                            surveyFinalScore != 0 ? surveyFinalScore / 4 : 0;
+                      if (widget.index + 1 == widget.length){
+
+                        double percentageResult=0;
+                        double finalScore=0;
+
+                        for (num e in widget.finalScore) {
+                          finalScore += e;
+                        }
+
+                        if(finalScore!=0){
+
+                          percentageResult=finalScore/4;
+
+                        }
+                        String comment='';
+
+
+                        if(percentageResult>=0&&percentageResult<= 20){
+
+                          comment='This is Bad location ';
+
+                        }
+                        if(percentageResult>=20&&percentageResult<= 40){
+                          comment='Tis is a Bad loction';
+                        }
+                        if(percentageResult>=40&&percentageResult<= 60){
+                          comment='This is a poor location';
+                        }
+                        if(percentageResult>=60&&percentageResult<= 80){
+                          comment='This is a good loction';
+                        }
+                        if(percentageResult>=80&&percentageResult<= 100){
+                          comment='This is excellent location';
+                        }
+
+
+
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => ShowResult(
-                                      finalScore: widget.finalScore,
-                                  backResult: widget.finalResults,
-                                  googleLocation: widget.googleLocation,
-                                  surveyName: widget.surveyName,
-                                  town: widget.town,
-                                    surveyId:widget.surveyId
-                                    )));
+                                    comment:comment,
+                                    finalScore: finalScore,
+                                    backResult: widget.finalResults,
+                                    googleLocation: widget.googleLocation,
+                                    surveyName: widget.surveyName,
+                                    town: widget.town,
+                                    surveyId:widget.surveyId,
+                                    percentage:percentageResult
+                                )));
                       }
                     }
                   },
-                  child: Text("Next").tr(context:context),
+                  child: Text(("Next").tr()),
                 ),
               ),
             )
@@ -209,29 +242,8 @@ class __CustomRadioGroupState extends State<CustomRadioGroup> {
       ),
     );
   }
+//  print(key);
 
-  _calculateResult() {
-    if (_picked != null) {
-      var key = widget.map.keys
-          .firstWhere((k) => widget.map[k] == _picked, orElse: () => null);
-      double weight = double.parse(widget.question.weightage);
-      double doubleScore = double.parse(key);
-      double finalScore = weight * doubleScore;
-      AllResults result = AllResults(
-          questionId: widget.question.id,
-          option: _picked,
-          score: key != null ? key : '0',
-          finalScore: finalScore.toString());
-      widget.addScore(result);
-    }
-    //  print(key);
-  }
 
-  _calculateScore() {
-    var key = widget.map.keys
-        .firstWhere((k) => widget.map[k] == _picked, orElse: () => null);
-    double weight = double.parse(widget.question.weightage);
-    double doubleScore = double.parse(key);
-    double finalScore = weight * doubleScore;
-  }
+
 }
