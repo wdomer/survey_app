@@ -14,8 +14,8 @@ class SettingsScreenCard extends StatelessWidget {
     return InkWell(
       onTap: tapped,
       child: Container(
-        height: MediaQuery.of(context).size.width / 3.5,
-        width: MediaQuery.of(context).size.width / 3.5,
+        height: MediaQuery.of(context).size.width / 4,
+        width: MediaQuery.of(context).size.width / 4,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             border: Border.all(width: 1, color: Colors.black)),
@@ -24,8 +24,8 @@ class SettingsScreenCard extends StatelessWidget {
           children: <Widget>[
             SvgPicture.asset(
               icon,
-              height: 36,
-              width: 36,
+//              height: 36,
+//              width: 36,
               color: loginBtnColor,
             ),
             SizedBox(

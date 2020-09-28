@@ -5,6 +5,7 @@ import 'package:survey_app/common/AppColors.dart';
 import 'package:survey_app/screens/account_screen/AccountScreen.dart';
 import 'package:survey_app/screens/home_screen/HomeScreen.dart';
 import 'package:survey_app/screens/login_screen.dart';
+import 'package:survey_app/screens/notification_screen/notification_screen.dart';
 import 'package:survey_app/screens/settings_screen/SettingsScreen.dart';
 import 'package:survey_app/screens/survey_screen/SurveyScreen.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -58,7 +59,7 @@ class DrawerWidget extends StatelessWidget {
                       DrawerList(
                         title: "Notifications" ,
                         icon: "notifications.svg" ,
-                     //   tapped: ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Notification())),
+                    tapped: ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>NotificationScreen())),
                       ),
                       DrawerList(
                         title: "Settings" ,

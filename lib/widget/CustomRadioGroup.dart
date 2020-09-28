@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_app/local_database/Question.dart';
 import 'package:survey_app/local_database/back_result.dart';
-import 'package:survey_app/local_database/results.dart';
 import 'package:survey_app/screens/saved_surveys_screen/show_result.dart';
 import 'package:survey_app/widget/my_radio_button_group.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -203,7 +202,7 @@ class __CustomRadioGroupState extends State<CustomRadioGroup> {
 
                         }
                         if(percentageResult>=20&&percentageResult<= 40){
-                          comment='Tis is a Bad loction';
+                          comment='This is a Bad loction';
                         }
                         if(percentageResult>=40&&percentageResult<= 60){
                           comment='This is a poor location';

@@ -18,14 +18,14 @@ class HomeScreenCard extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         child: Container(
-          height: 100,
+          height: 80,
           width: MediaQuery.of(context).size.width,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-                height: 80,
-                width: 80,
+                height: 60,
+                width: 60,
                 padding: EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
@@ -59,18 +59,20 @@ class HomeScreenCard extends StatelessWidget {
                       title,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          fontSize: 22,
+                        color: Colors.black54,
+                          fontSize: 18,
                           fontWeight: FontWeight.w700,
                           letterSpacing: 1),
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 8,
                     ),
                     Center(
                       child: Text(
                         subtitle,
                         style: TextStyle(
-                            fontSize: 22,
+
+                            fontSize: 18,
                             fontWeight: FontWeight.w700,
                             color: unselectedItemColor),
                       ),

@@ -121,6 +121,7 @@ class _ShowResultState extends State<ShowResult> {
                               responses: widget.backResult
                           )));
 
+
 //                  response.catchError(
 //                        (e) => _scaffoldKey.currentState.showSnackBar(
 //                      SnackBar(
@@ -150,7 +151,7 @@ class _ShowResultState extends State<ShowResult> {
                           );
                         },
                         color: Colors.grey,
-                        child: Text(("Done !!").tr()),
+                        child: Text(("Done").tr()),
                       ),
                     ),
                   )

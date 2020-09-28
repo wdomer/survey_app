@@ -16,20 +16,17 @@ class DownloadFormScreen extends StatefulWidget {
 
 class _DownloadFormScreenState extends State<DownloadFormScreen> {
   bool isloading = false;
-  String token;
+ // String token;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+//
+//  void getToken() async {
+//    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+//
+//    token = sharedPreferences.getString('token');
+//  }
 
-  void getToken() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-    token = sharedPreferences.getString('token');
-  }
 
-  @override
-  void initState() {
-    super.initState();
-    getToken();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -201,3 +198,77 @@ class _DownloadFormScreenState extends State<DownloadFormScreen> {
         });
   }
 }
+//with SingleTickerProviderStateMixin
+//AnimationController animationController;
+//Animation<Color> animationOne;
+//Animation<Color> animationTwo;
+
+//@override
+//void initState() {
+//  super.initState();
+//  getToken();
+//  animationController=AnimationController(
+//      duration:Duration(milliseconds: 500),
+//      vsync: this);
+//  animationOne=ColorTween(begin: Colors.grey,end: Colors.grey.shade100).animate(animationController);
+//  animationOne=ColorTween(begin: Colors.grey.shade100,end: Colors.grey).animate(animationController);
+//  animationController.forward();
+//
+//  animationController.addListener(() {
+//    if(animationController.status==AnimationStatus.completed){
+//      animationController.reverse();
+//    }else if(animationController.status==AnimationStatus.dismissed){
+//      animationController.forward();
+//    }this.setState(() {
+//
+//    });
+//  });
+//}
+//
+//ShaderMask(
+//blendMode: BlendMode.srcATop,  // Add this
+//shaderCallback: (Rect bounds) {
+//return LinearGradient(
+//
+//colors: <Color>[animationOne.value, animationTwo.value],
+//tileMode: TileMode.mirror,
+//).createShader(bounds);
+//},
+//child: Column(
+//crossAxisAlignment: CrossAxisAlignment.center,
+//mainAxisAlignment: MainAxisAlignment.center,
+//children: [
+//Container(
+//height: MediaQuery.of(context).size.height/8,
+//width: double.infinity,
+//color: Colors.white,
+//),
+//SizedBox(height: 10,),
+//
+//Container(
+//height: MediaQuery.of(context).size.height/8,
+//width: double.infinity,
+//color: Colors.white,
+//),
+//SizedBox(height: 10,),
+//Container(
+//height: MediaQuery.of(context).size.height/8,
+//width: double.infinity,
+//color: Colors.white,
+//),
+//SizedBox(height: 10,),
+//Container(
+//height: MediaQuery.of(context).size.height/8,
+//width: double.infinity,
+//color: Colors.white,
+//),
+//SizedBox(height: 10,),
+//Container(
+//height: MediaQuery.of(context).size.height/8,
+//width: double.infinity,
+//color: Colors.white,
+//),
+//SizedBox(height: 10,),
+//],
+//),
+//);

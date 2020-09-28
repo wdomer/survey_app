@@ -4,12 +4,18 @@ import 'package:survey_app/local_database/moor_database.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:survey_app/screens/saved_surveys_screen/survey_description_screen.dart';
 
-class SavedSurveysScreen extends StatelessWidget {
+class SavedSurveysScreen extends StatefulWidget {
+  @override
+  _SavedSurveysScreenState createState() => _SavedSurveysScreenState();
+}
+
+class _SavedSurveysScreenState extends State<SavedSurveysScreen> {
+  bool isLoading=false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
+        body:isLoading==false? Container(
           child: FutureBuilder(
             future: Provider.of<AppDatabase>(context).getAllOrder(),
             builder: (context, snapshot) {
@@ -45,6 +51,8 @@ class SavedSurveysScreen extends StatelessWidget {
               }
             },
           ),
+        ):Center(
+          child: CircularProgressIndicator(),
         ),
       ),
     );
@@ -53,6 +61,7 @@ class SavedSurveysScreen extends StatelessWidget {
   Widget _buildList(BuildContext context, var survey) {
     // var convertData=DataModel.fromJson(survey);
     // print(convertData);
+
     return ListView.builder(
         itemCount: survey.length,
         itemBuilder: (context, i) {
@@ -129,13 +138,22 @@ class SavedSurveysScreen extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () async {
-                            final database = await Provider.of<AppDatabase>(
+                            setState(() {
+                              isLoading=true;
+                            });
+
+                            final database =  Provider.of<AppDatabase>(
                                 context,
                                 listen: false);
 
-                            var response = database.deleteSurveys(survey[i]);
+                            var response =await database.deleteSurveys(survey[i]);
+
                             print("response !!!!!!!!!!!!!!");
                             print(response);
+
+                            setState(() {
+                              isLoading=false ;
+                            });
                           },
                           child: Container(
                               height: 40,

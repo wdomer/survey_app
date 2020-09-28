@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:survey_app/common/AppColors.dart';
 import 'package:survey_app/screens/account_screen//AccountScreen.dart';
 import 'package:survey_app/screens/home_screen/HomeScreen.dart';
+import 'package:survey_app/screens/notification_screen/notification_screen.dart';
 import 'package:survey_app/screens/settings_screen/SettingsScreen.dart';
 import 'package:survey_app/screens/survey_screen/SurveyScreen.dart';
 
@@ -38,7 +39,9 @@ class _BottomBarState extends State<BottomBar> {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => SurveyScreen()));
     }
-    if (_selectedIndex == 3) {}
+    if (_selectedIndex == 3) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>NotificationScreen()));
+    }
     if (_selectedIndex == 4) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => SettingsScreen()));
