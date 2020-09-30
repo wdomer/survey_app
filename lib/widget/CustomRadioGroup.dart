@@ -216,12 +216,12 @@ class __CustomRadioGroupState extends State<CustomRadioGroup> {
 
 
 
-                        Navigator.push(
+                        Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => ShowResult(
                                     comment:comment,
-                                    finalScore: finalScore,
+                                    finalScore:finalScore!=0? finalScore/100:finalScore,
                                     backResult: widget.finalResults,
                                     googleLocation: widget.googleLocation,
                                     surveyName: widget.surveyName,

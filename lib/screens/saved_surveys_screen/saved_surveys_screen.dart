@@ -17,7 +17,7 @@ class _SavedSurveysScreenState extends State<SavedSurveysScreen> {
       child: Scaffold(
         body:isLoading==false? Container(
           child: FutureBuilder(
-            future: Provider.of<AppDatabase>(context).getAllOrder(),
+            future: Provider.of<AppDatabase>(context).getAllSurveys(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if(snapshot.hasData){

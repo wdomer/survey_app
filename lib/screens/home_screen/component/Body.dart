@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:survey_app/common/AppColors.dart';
+import 'package:survey_app/local_database/moor_database.dart';
 import 'package:survey_app/screens/download_form_screen.dart';
 import 'package:survey_app/screens/home_screen/component/HomeScreenCard.dart';
 import 'file:///C:/flutter_project/survey_app/lib/screens/saved_surveys_screen/saved_surveys_screen.dart';
@@ -74,30 +76,97 @@ class _BodyState extends State<Body> {
                     title: "DownLoad Forms".tr(),
                     subtitle: "",
                   ),
-                  HomeScreenCard(
-                    onClick: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SavedSurveysScreen()));
-                    },
-                    icon: "assets/svg/fill_form.svg",
-                    title: "Fill Forms".tr(),
-                    subtitle: "",
-                  ),
-                  HomeScreenCard(
-                    onClick: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SurveyScreen(),
-                        ),
+
+
+                  FutureBuilder(
+                    future: Provider.of<AppDatabase>(context).getAllSurveys(),
+                    builder: (context,snapshot){
+
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        var length=snapshot.data.length;
+                        if(snapshot.hasData){
+
+                          if (snapshot.hasError) {
+                            return Container();
+                          } else {
+                            return
+
+                              HomeScreenCard(
+                              onClick: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SavedSurveysScreen()));
+                              },
+                              icon: "assets/svg/fill_form.svg",
+                              title: "Fill Forms".tr(),
+                              subtitle:length==null||length==0?'0': ("$length"),
+                            );
+//
+//
+                          }
+                        }
+                      }
+                      return  HomeScreenCard(
+                        onClick: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SavedSurveysScreen()));
+                        },
+                        icon: "assets/svg/fill_form.svg",
+                        title: "Fill Forms".tr(),
+                        subtitle:"0",
                       );
                     },
-                    icon: "assets/svg/saved_response.svg",
-                    title: "Saved Response".tr(),
-                    subtitle: "",
+
                   ),
+
+                  FutureBuilder(
+                    future: Provider.of<AppDatabase>(context).getAllResult(),
+                    builder: (context,snapshot){
+
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        var length=snapshot.data.length;
+                        if(snapshot.hasData){
+                          if (snapshot.hasError) {
+                            return Container();
+                          } else {
+                            return HomeScreenCard(
+                              onClick: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SurveyScreen(),
+                                  ),
+                                );
+                              },
+                              icon: "assets/svg/saved_response.svg",
+                              title: "Saved Response".tr(),
+                              subtitle: length==null||length==0?'0': ("$length"),
+                            );
+//
+//
+                          }
+                        }
+                      }
+                      return HomeScreenCard(
+                        onClick: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SurveyScreen(),
+                            ),
+                          );
+                        },
+                        icon: "assets/svg/saved_response.svg",
+                        title: "Saved Response".tr(),
+                        subtitle: "0",
+                      );
+                    },
+
+                  ),
+
                 ],
               ),
             ),

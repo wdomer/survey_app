@@ -22,14 +22,20 @@ class DrawerWidget extends StatelessWidget {
               Stack(
                 children: <Widget>[
                   Container(
+
+                    alignment: AlignmentDirectional.topStart,
                     height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
+                    width: MediaQuery.of(context).size.width/1.2,
                     decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: AssetImage("assets/images/screen/drawer_bg.png"),
-                      ),
-                    ),
+//                      image: DecorationImage(
+//                        fit: BoxFit.fill,
+//                        image: AssetImage("assets/images/screen/drawer_bg.png"),
+//                      ),
+                    color: Colors.blue
+                  ),
+                  child: CustomPaint(
+                    painter: PathPaint(),
+                  ),
                   ),
                   Column(
                     children: <Widget>[
@@ -203,6 +209,35 @@ class DrawerList extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class PathPaint extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint();
+    paint.color = Colors.blue;
+    paint.style = PaintingStyle.fill;
+
+    var path = Path();
+    path.moveTo( size.width * .4,0);
+//    path.quadraticBezierTo(size.width * 0.35, size.height * 0.4,
+//        size.width * 0.58, size.height * 0.6);
+//    path.quadraticBezierTo(size.width * 0.72, size.height * 0.8,
+//        size.height * 0.92, size.height * 0.8);
+    // path.quadraticBezierTo(
+    //     size.width * 0.98, size.height * 0.8, size.width, size.height * 0.8);
+
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+
+    path.close();
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
   }
 }
 

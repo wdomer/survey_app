@@ -16,6 +16,7 @@ class MapWidget extends StatefulWidget {
 class MapWidgetState extends State<MapWidget> {
   Completer<GoogleMapController> _controller = Completer();
   GoogleMapController _googleMapController;
+  Set<Marker> _markers={};
 
   static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(15.5007, 32.5599),
@@ -32,32 +33,45 @@ class MapWidgetState extends State<MapWidget> {
   Widget build(BuildContext context) {
     return new Scaffold(
       body: GoogleMap(
-          mapType: MapType.normal,
-          initialCameraPosition: _kGooglePlex,
-          onMapCreated: (GoogleMapController controller) {
-            _controller.complete(controller);
-          },
-         // zoomControlsEnabled: true,
+        markers: _markers,
+        mapType: MapType.normal,
+        initialCameraPosition: _kGooglePlex,
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
+        },
+        // zoomControlsEnabled: true,
         //  scrollGesturesEnabled: true,
-          zoomControlsEnabled: false,
-          zoomGesturesEnabled: true,
-          scrollGesturesEnabled: true,
-          compassEnabled: true,
-          rotateGesturesEnabled: true,
-          mapToolbarEnabled: true,
-          tiltGesturesEnabled: true,
-          gestureRecognizers: < Factory < OneSequenceGestureRecognizer >> [
-            new Factory < OneSequenceGestureRecognizer > (
-                  () => new EagerGestureRecognizer(),
-            ),
-          ].toSet(),
+        zoomControlsEnabled: false,
+        zoomGesturesEnabled: true,
+        scrollGesturesEnabled: true,
+        compassEnabled: true,
+        rotateGesturesEnabled: true,
+        mapToolbarEnabled: true,
+        tiltGesturesEnabled: true,
+        gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
+          new Factory<OneSequenceGestureRecognizer>(
+            () => new EagerGestureRecognizer(),
+          ),
+        ].toSet(),
 
-          onTap: (latLng) {
-            widget.onTap("${latLng.latitude}", "${latLng.longitude}");
-
-            print('${latLng.latitude}, ${latLng.longitude}');
-          }),
+        onTap: _handleTap
+      ),
     );
+  }
+  _handleTap(LatLng latLng) {
+    setState(() {
+      _markers.clear();
+      widget.onTap("${latLng.latitude}", "${latLng.longitude}");
+      _markers.add(Marker(
+        markerId: MarkerId(latLng.toString()),
+        position: latLng,
+        infoWindow: InfoWindow(
+          title: 'Choosed location',
+        ),
+        icon:
+        BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+      ));
+    });
   }
 
 //

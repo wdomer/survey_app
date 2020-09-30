@@ -25,7 +25,7 @@ class _QuestionListScreenState extends State<QuestionListScreen> {
   List<BackResults> backResult = [];
   List<CustomRadioGroup> customRadioGroup = [];
   List<double> finalScore = [];
-  final itemSize = 500.0;
+   //double itemSize ;
 //  static int questionCurrentIndex = 0;
   ScrollController _controller;
 
@@ -33,7 +33,9 @@ class _QuestionListScreenState extends State<QuestionListScreen> {
   void initState() {
     _controller = ScrollController();
 
+
     super.initState();
+
   }
 
   void _addResult(BackResults newValue) {
@@ -48,15 +50,19 @@ class _QuestionListScreenState extends State<QuestionListScreen> {
     });
   }
 
+  double itemSize(){
+    return MediaQuery.of(context).size.height;
+  }
   _moveUp() {
-    _controller.animateTo(_controller.offset - itemSize,
+    _controller.animateTo(_controller.offset - itemSize(),
         curve: Curves.elasticInOut, duration: Duration(milliseconds: 500));
   }
 
   _moveDown() {
-    _controller.animateTo(_controller.offset + itemSize,
+    _controller.animateTo(_controller.offset +itemSize(),
         curve: Curves.linear, duration: Duration(milliseconds: 500));
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +104,7 @@ class _QuestionListScreenState extends State<QuestionListScreen> {
                 physics: const NeverScrollableScrollPhysics(),
                 controller: _controller,
                 itemCount: widget.question.length,
-                itemExtent: itemSize,
+                itemExtent: itemSize(),
                 itemBuilder: (context, index) {
                   var q = widget.question[index];
 

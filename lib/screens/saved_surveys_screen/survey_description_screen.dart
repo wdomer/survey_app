@@ -118,7 +118,11 @@ class _SurveyDescriptionScreenState extends State<SurveyDescriptionScreen> {
               SizedBox(height: 10,),
               Container(
                 margin: EdgeInsets.all(10),
-                child: Text("Choose Location").tr(context:context),
+                child: RichText(
+                    text:TextSpan(text:"Choose Location"  .tr(),style: TextStyle(fontWeight: FontWeight.w700,color: Colors.black54),
+                        children: <TextSpan>[
+                             TextSpan(text: ' (top on location)', style: TextStyle(fontWeight: FontWeight.w500,color: Colors.grey)),
+                         ], )),
               ),
               SizedBox(
                 height: 10,

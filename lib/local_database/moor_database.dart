@@ -42,7 +42,7 @@ class AppDatabase extends _$AppDatabase {
 //        }
 //      });
 
-  Future<List<Datum>> getAllOrder() => select(datums).get();
+  Future<List<Datum>> getAllSurveys() => select(datums).get();
   Future insertSurveys(Datum datum) => into(datums).insert(datum);
   Future updateSurveys(Datum datum) => update(datums).replace(datum);
   Future deleteSurveys(Datum datum) => delete(datums).delete(datum);
