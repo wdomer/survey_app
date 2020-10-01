@@ -95,7 +95,7 @@ class _BodyState extends State<Body> {
                               icon: "assets/svg/download_form.svg",
                               title: "DownLoad Forms".tr(),
                              // subtitle: "",
-                              subtitle:length==null||length==0?'0': ("$length"),
+                              subtitle:length==null||length==0?'': ("$length"),
                             );
 //
 //
@@ -124,7 +124,7 @@ class _BodyState extends State<Body> {
                     },
                     icon: "assets/svg/download_form.svg",
                     title: "DownLoad Forms".tr(),
-                    subtitle: "0",
+                    subtitle: "",
                   ),
                   FutureBuilder(
                     future: Provider.of<AppDatabase>(context).getAllSurveys(),
@@ -146,7 +146,7 @@ class _BodyState extends State<Body> {
                               icon: "assets/svg/fill_form.svg",
                               title: "Fill Forms".tr(),
                               subtitle: length == null || length == 0
-                                  ? '0'
+                                  ? ''
                                   : ("$length"),
                             );
 //
@@ -163,7 +163,7 @@ class _BodyState extends State<Body> {
                         },
                         icon: "assets/svg/fill_form.svg",
                         title: "Fill Forms".tr(),
-                        subtitle: "0",
+                        subtitle: "",
                       );
                     },
                   ),
@@ -188,7 +188,7 @@ class _BodyState extends State<Body> {
                               icon: "assets/svg/saved_response.svg",
                               title: "Saved Response".tr(),
                               subtitle: length == null || length == 0
-                                  ? '0'
+                                  ? ''
                                   : ("$length"),
                             );
 //
@@ -207,7 +207,7 @@ class _BodyState extends State<Body> {
                         },
                         icon: "assets/svg/saved_response.svg",
                         title: "Saved Response".tr(),
-                        subtitle: "0",
+                        subtitle: "",
                       );
                     },
                   ),
