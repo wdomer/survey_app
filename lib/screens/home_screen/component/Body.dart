@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:survey_app/common/AppColors.dart';
+import 'package:survey_app/local_database/all_surveys.dart';
 import 'package:survey_app/local_database/moor_database.dart';
 import 'package:survey_app/screens/download_form_screen.dart';
 import 'package:survey_app/screens/home_screen/component/HomeScreenCard.dart';
 import 'file:///C:/flutter_project/survey_app/lib/screens/saved_surveys_screen/saved_surveys_screen.dart';
 import 'package:survey_app/screens/survey_screen/SurveyScreen.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:survey_app/services/surveys_all_services_local.dart';
 
 class Body extends StatefulWidget {
   final String token;
@@ -18,9 +20,19 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  String token;
 
+  getToken() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    token = sharedPreferences.getString('token');
+  }
 
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getToken();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,49 +69,31 @@ class _BodyState extends State<Body> {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  HomeScreenCard(
-                    onClick: () async{
-                    SharedPreferences share=await SharedPreferences.getInstance();
-                    String token=share.getString("token");
-                    print(token);
-                    if(token!=null) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  DownloadFormScreen(
-                                    token: token,
-                                  )));
-                    }
-                    },
-                    icon: "assets/svg/download_form.svg",
-                    title: "DownLoad Forms".tr(),
-                    subtitle: "",
-                  ),
-
-
                   FutureBuilder(
-                    future: Provider.of<AppDatabase>(context).getAllSurveys(),
-                    builder: (context,snapshot){
-
+                    future: Provider.of<SurveysAllServicesLocal>(context)
+                        .getSurveysLocal("Bearer $token", 0),
+                    builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
-                        var length=snapshot.data.length;
-                        if(snapshot.hasData){
-
+                        if (snapshot.hasData) {
                           if (snapshot.hasError) {
                             return Container();
                           } else {
-                            return
+                            print(snapshot.data.body);
+                            final response = snapshot.data.body;
+                        var survey = AllSurveys.fromJson(response);
+                        var length = survey.surveys.data.length;
 
-                              HomeScreenCard(
+                            return HomeScreenCard(
                               onClick: () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SavedSurveysScreen()));
+                                        builder: (context) =>
+                                            SavedSurveysScreen()));
                               },
-                              icon: "assets/svg/fill_form.svg",
-                              title: "Fill Forms".tr(),
+                              icon: "assets/svg/download_form.svg",
+                              title: "DownLoad Forms".tr(),
+                             // subtitle: "",
                               subtitle:length==null||length==0?'0': ("$length"),
                             );
 //
@@ -107,7 +101,48 @@ class _BodyState extends State<Body> {
                           }
                         }
                       }
-                      return  HomeScreenCard(
+                      return HomeScreenCard(
+                        onClick: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SavedSurveysScreen()));
+                        },
+                        icon: "assets/svg/download_form.svg",
+                        title: "DownLoad Forms".tr(),
+                        subtitle: "0",
+                      );
+                    },
+                  ),
+                  FutureBuilder(
+                    future: Provider.of<AppDatabase>(context).getAllSurveys(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        var length = snapshot.data.length;
+                        if (snapshot.hasData) {
+                          if (snapshot.hasError) {
+                            return Container();
+                          } else {
+                            return HomeScreenCard(
+                              onClick: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SavedSurveysScreen()));
+                              },
+                              icon: "assets/svg/fill_form.svg",
+                              title: "Fill Forms".tr(),
+                              subtitle: length == null || length == 0
+                                  ? '0'
+                                  : ("$length"),
+                            );
+//
+//
+                          }
+                        }
+                      }
+                      return HomeScreenCard(
                         onClick: () {
                           Navigator.push(
                               context,
@@ -116,19 +151,16 @@ class _BodyState extends State<Body> {
                         },
                         icon: "assets/svg/fill_form.svg",
                         title: "Fill Forms".tr(),
-                        subtitle:"0",
+                        subtitle: "0",
                       );
                     },
-
                   ),
-
                   FutureBuilder(
                     future: Provider.of<AppDatabase>(context).getAllResult(),
-                    builder: (context,snapshot){
-
+                    builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
-                        var length=snapshot.data.length;
-                        if(snapshot.hasData){
+                        var length = snapshot.data.length;
+                        if (snapshot.hasData) {
                           if (snapshot.hasError) {
                             return Container();
                           } else {
@@ -143,7 +175,9 @@ class _BodyState extends State<Body> {
                               },
                               icon: "assets/svg/saved_response.svg",
                               title: "Saved Response".tr(),
-                              subtitle: length==null||length==0?'0': ("$length"),
+                              subtitle: length == null || length == 0
+                                  ? '0'
+                                  : ("$length"),
                             );
 //
 //
@@ -164,9 +198,7 @@ class _BodyState extends State<Body> {
                         subtitle: "0",
                       );
                     },
-
                   ),
-
                 ],
               ),
             ),
