@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:survey_app/local_database/moor_database.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:survey_app/screens/saved_surveys_screen/survey_description_screen.dart';
+import '../../local_database/moor_database.dart';
+import 'survey_description_screen.dart';
 
 class SavedSurveysScreen extends StatefulWidget {
   @override

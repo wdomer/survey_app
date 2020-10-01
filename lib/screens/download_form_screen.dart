@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:survey_app/local_database/all_surveys.dart';
-import 'package:survey_app/local_database/moor_database.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:survey_app/services/surveys_all_services_local.dart';
+
+import '../local_database/all_surveys.dart';
+import '../local_database/moor_database.dart';
+
+import '../services/surveys_all_services_local.dart';
 
 class DownloadFormScreen extends StatefulWidget {
   final String token;

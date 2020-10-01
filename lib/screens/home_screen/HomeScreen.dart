@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:survey_app/screens/home_screen/component/Body.dart';
-import 'package:survey_app/widget/BottomBar.dart';
-import 'package:survey_app/widget/DrawerWidget.dart';
+import 'component/Body.dart';
+import '../../widget/BottomBar.dart';
+import '../../widget/DrawerWidget.dart';
 
 class HomeScreen extends StatefulWidget {
   final String token;

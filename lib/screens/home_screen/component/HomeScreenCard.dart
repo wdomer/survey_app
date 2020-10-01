@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:survey_app/common/AppColors.dart';
+import '../../../common/AppColors.dart';
 
 class HomeScreenCard extends StatelessWidget {
   final String icon;

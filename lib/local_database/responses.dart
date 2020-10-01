@@ -1,5 +1,5 @@
-import 'package:survey_app/local_database/back_result.dart';
-import 'package:survey_app/local_database/description.dart';
+import 'back_result.dart';
+import 'description.dart';
 import 'package:json_annotation/json_annotation.dart' as j;
 
 part 'responses.g.dart';

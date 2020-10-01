@@ -2,7 +2,7 @@
 import 'dart:convert';
 
 import 'package:moor_flutter/moor_flutter.dart';
-import 'package:survey_app/local_database/responses.dart';
+import 'responses.dart';
 
 class ResultResponsesConverter extends TypeConverter<ResultResponses, String> {
   const ResultResponsesConverter();

@@ -1,4 +1,4 @@
-import 'package:survey_app/local_database/data.dart';
+import 'data.dart';
 import 'package:json_annotation/json_annotation.dart' as j;
 
 part 'surveys.g.dart';

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:survey_app/common/AppColors.dart';
-import 'package:survey_app/screens/account_screen//AccountScreen.dart';
-import 'package:survey_app/screens/home_screen/HomeScreen.dart';
-import 'package:survey_app/screens/notification_screen/notification_screen.dart';
-import 'package:survey_app/screens/settings_screen/SettingsScreen.dart';
-import 'package:survey_app/screens/survey_screen/SurveyScreen.dart';
+
+import '../common/AppColors.dart';
+import '../screens/account_screen//AccountScreen.dart';
+import '../screens/home_screen/HomeScreen.dart';
+import '../screens/notification_screen/notification_screen.dart';
+import '../screens/settings_screen/SettingsScreen.dart';
+import '../screens/survey_screen/SurveyScreen.dart';
 
 class BottomBar extends StatefulWidget {
   @override

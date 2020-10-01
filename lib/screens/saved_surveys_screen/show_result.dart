@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:survey_app/local_database/back_result.dart';
-import 'package:survey_app/local_database/description.dart';
-import 'package:survey_app/local_database/moor_database.dart';
-import 'package:survey_app/local_database/responses.dart';
-import 'package:survey_app/screens/home_screen/HomeScreen.dart';
 import 'package:easy_localization/easy_localization.dart';
+
+import '../../local_database/back_result.dart';
+import '../../local_database/description.dart';
+import '../../local_database/moor_database.dart';
+import '../../local_database/responses.dart';
+import '../home_screen/HomeScreen.dart';
+
 
 class ShowResult extends StatefulWidget {
   final double percentage;

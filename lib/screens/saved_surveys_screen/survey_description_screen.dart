@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:survey_app/common/AppColors.dart';
-import 'package:survey_app/local_database/data.dart';
-import 'package:survey_app/local_database/responses.dart';
-import 'package:survey_app/screens/saved_surveys_screen/question_list_screen.dart';
-import 'package:survey_app/widget/map_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
+
+import '../../common/AppColors.dart';
+import '../../local_database/data.dart';
+import '../../local_database/responses.dart';
+import '../../screens/saved_surveys_screen/question_list_screen.dart';
+import '../../widget/map_widget.dart';
+
 
 class SurveyDescriptionScreen extends StatefulWidget {
   final DataModel data;

@@ -1,8 +1,9 @@
 
 
 import 'package:chopper/chopper.dart';
-import 'package:survey_app/common/urls.dart';
-import 'package:survey_app/local_database/responses.dart';
+
+import '../common/urls.dart';
+import '../local_database/responses.dart';
 
 
 part 'response_services.chopper.dart';

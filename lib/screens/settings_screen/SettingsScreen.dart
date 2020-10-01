@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:survey_app/screens/settings_screen/components/Body.dart';
-import 'package:survey_app/widget/BottomBar.dart';
-import 'package:survey_app/widget/DrawerWidget.dart';
+import 'components/Body.dart';
+import '../../widget/BottomBar.dart';
+import '../../widget/DrawerWidget.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key key}) : super(key: key);

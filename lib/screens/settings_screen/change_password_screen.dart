@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:survey_app/models/change_password_model.dart';
-import 'package:survey_app/services/change_password_services.dart';
+
+import '../../models/change_password_model.dart';
+import '../../services/change_password_services.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   @override

@@ -1,8 +1,8 @@
 import 'package:moor_flutter/moor_flutter.dart';
-import 'package:survey_app/local_database/ResultResponsesConverter.dart';
-import 'package:survey_app/local_database/data.dart';
-import 'package:survey_app/local_database/DataConverter.dart';
-import 'package:survey_app/local_database/responses.dart';
+import 'ResultResponsesConverter.dart';
+import 'data.dart';
+import 'DataConverter.dart';
+import 'responses.dart';
 
 import 'package:moor/moor.dart';
 

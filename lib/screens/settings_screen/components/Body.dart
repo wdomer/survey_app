@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:survey_app/common/AppColors.dart';
-import 'package:survey_app/common/language_view.dart';
-import 'package:survey_app/screens/account_screen/AccountScreen.dart';
-import 'package:survey_app/screens/login_screen.dart';
-import 'package:survey_app/screens/settings_screen/change_password_screen.dart';
-import 'package:survey_app/screens/settings_screen/components/SettingsScreenCard.dart';
+
+import '../../../common/AppColors.dart';
+import '../../../common/language_view.dart';
+import '../../account_screen/AccountScreen.dart';
+import '../../login_screen.dart';
+import '../change_password_screen.dart';
+import '../components/SettingsScreenCard.dart';
 
 class Body extends StatefulWidget {
   @override

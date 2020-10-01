@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:survey_app/local_database/moor_database.dart';
-import 'package:survey_app/screens/home_screen/HomeScreen.dart';
-import 'package:survey_app/screens/login_screen.dart';
-import 'package:survey_app/services/change_password_services.dart';
-import 'package:survey_app/services/login_services.dart';
-import 'package:survey_app/services/response_services.dart';
-import 'package:survey_app/services/surveys_all_services_local.dart';
+
+import 'local_database/moor_database.dart';
+import 'screens/home_screen/HomeScreen.dart';
+import 'screens/login_screen.dart';
+import 'services/change_password_services.dart';
+import 'services/login_services.dart';
+import 'services/response_services.dart';
+import 'services/surveys_all_services_local.dart';
 
 void main() async{
 WidgetsFlutterBinding.ensureInitialized();

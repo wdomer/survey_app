@@ -1,6 +1,6 @@
 import 'package:chopper/chopper.dart';
-import 'package:survey_app/common/urls.dart';
-import 'package:survey_app/models/change_password_model.dart';
+import '../common/urls.dart';
+import '../models/change_password_model.dart';
 
 part 'change_password_services.chopper.dart';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:survey_app/common/AppColors.dart';
-import 'package:survey_app/screens/account_screen/components/AccountScreenCard.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:survey_app/common/AppColors.dart';
+import 'AccountScreenCard.dart';
 
 class Body extends StatefulWidget {
   @override

@@ -1,6 +1,8 @@
-import 'package:survey_app/local_database/Category.dart';
-import 'package:survey_app/local_database/Question.dart';
+
 import 'package:json_annotation/json_annotation.dart' as j;
+
+import 'Category.dart';
+import 'Question.dart';
 
 part 'data.g.dart';
 

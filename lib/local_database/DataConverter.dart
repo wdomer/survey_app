@@ -2,7 +2,8 @@
 import 'dart:convert';
 
 import 'package:moor_flutter/moor_flutter.dart';
-import 'package:survey_app/local_database/data.dart';
+
+import 'data.dart';
 
 class DataModelConverter extends TypeConverter<DataModel, String> {
   const DataModelConverter();

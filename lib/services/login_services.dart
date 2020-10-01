@@ -1,5 +1,5 @@
 import 'package:chopper/chopper.dart';
-import 'package:survey_app/common/urls.dart';
+import '../common/urls.dart';
 
 part 'login_services.chopper.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_app/widget/BottomBar.dart';
+import '../../widget/BottomBar.dart';
 
 class NotificationScreen extends StatelessWidget {
   @override

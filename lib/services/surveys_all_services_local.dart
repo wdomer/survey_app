@@ -1,7 +1,7 @@
 
 
 import 'package:chopper/chopper.dart';
-import 'package:survey_app/common/urls.dart';
+import '../common/urls.dart';
 
 
 part 'surveys_all_services_local.chopper.dart';

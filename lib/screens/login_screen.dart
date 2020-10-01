@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:survey_app/common/AppColors.dart';
-import 'package:survey_app/models/login_model.dart';
-import 'package:survey_app/screens/home_screen/HomeScreen.dart';
-import 'package:survey_app/services/login_services.dart';
 import 'package:easy_localization/easy_localization.dart';
+
+import '../common/AppColors.dart';
+import '../models/login_model.dart';
+import 'home_screen/HomeScreen.dart';
+import '../services/login_services.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

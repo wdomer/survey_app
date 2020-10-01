@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:survey_app/local_database/Question.dart';
-import 'package:survey_app/local_database/back_result.dart';
-import 'package:survey_app/screens/saved_surveys_screen/show_result.dart';
-import 'package:survey_app/widget/my_radio_button_group.dart';
 import 'package:easy_localization/easy_localization.dart';
+
+
+import '../local_database/Question.dart';
+import '../local_database/back_result.dart';
+import '../screens/saved_surveys_screen/show_result.dart';
+import '../widget/my_radio_button_group.dart';
 
 
 class CustomRadioGroup extends StatefulWidget {

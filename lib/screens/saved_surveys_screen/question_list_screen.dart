@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:survey_app/local_database/Question.dart';
-import 'package:survey_app/local_database/back_result.dart';
-import 'package:survey_app/local_database/description.dart';
-import 'package:survey_app/widget/CustomRadioGroup.dart';
-import 'package:easy_localization/easy_localization.dart';
+import '../../local_database/back_result.dart';
+import '../../local_database/Question.dart';
+import '../../local_database/description.dart';
+import '../../widget/CustomRadioGroup.dart';
 
 class QuestionListScreen extends StatefulWidget {
   final List<Question> question;
